@@ -36,7 +36,9 @@
     "table"
   ],
   "author": "Gunnar Gabrielson",
-  "contributors": ["Mehmet Baran"],
+  "contributors": [
+    "Mehmet Baran"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gunn4r/material-ui-advanced-table/issues"
