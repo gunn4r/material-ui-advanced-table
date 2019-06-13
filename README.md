@@ -4,7 +4,7 @@
 
 A simple and powerful Datatable for React based on [Material-UI Table](https://material-ui.com/api/table/) with many additional features.
 
-<!-- [![Build Status](https://travis-ci.org/mbrn/material-ui-advanced-table.svg?branch=master)](https://travis-ci.org/mbrn/material-ui-advanced-table) -->
+<!-- [![Build Status](https://travis-ci.org/gunn4r/material-ui-advanced-table.svg?branch=master)](https://travis-ci.org/gunn4r/material-ui-advanced-table) -->
 <!-- [![npm package](https://img.shields.io/npm/v/material-ui-advanced-table/latest.svg)](https://www.npmjs.com/package/material-ui-advanced-table) -->
 <!-- [![NPM Downloads](https://img.shields.io/npm/dt/material-ui-advanced-table.svg?style=flat)](https://npmcharts.com/compare/material-ui-advanced-table?minimal=true) -->
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/gunn4r/material-ui-advanced-table.svg)](http://isitmaintained.com/project/gunn4r/material-ui-advanced-table "Average time to resolve an issue")
@@ -36,7 +36,7 @@ You can access all code examples and documentation on our site [**gunn4r.com/mat
 
 <!-- ## Support material-ui-advanced-table
 
-To support material-ui-advanced-table visit [SUPPORT](https://www.patreon.com/mbrn) page. -->
+To support material-ui-advanced-table visit [SUPPORT](https://www.patreon.com/gunn4r) page. -->
 
 ## Prerequisites
 
@@ -190,9 +190,9 @@ ReactDOM.render(<App />, document.getElementById("react-div"));
 
 ## Contributing
 
-We'd love to have your helping hand on `material-ui-advanced-table`! See [CONTRIBUTING.md](https://github.com/mbrn/material-ui-advanced-table/blob/master/.github/CONTRIBUTING.md) for more information on what we're looking for and how to get started.
+We'd love to have your helping hand on `material-ui-advanced-table`! See [CONTRIBUTING.md](https://github.com/gunn4r/material-ui-advanced-table/blob/master/.github/CONTRIBUTING.md) for more information on what we're looking for and how to get started.
 
-If you have any sort of doubt, idea or just want to talk about the project, feel free to join [our chat on Gitter](https://gitter.im/material-ui-advanced-table/Lobby) :)
+
 
 ## License
 
