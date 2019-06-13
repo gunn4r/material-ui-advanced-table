@@ -1,5 +1,5 @@
 {
-  "name": "material-table",
+  "name": "material-ui-advanced-table",
   "version": "1.39.0",
   "description": "Datatable for React based on https://material-ui.com/api/table/ with additional features",
   "main": "dist/index.js",
@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mbrn/material-table.git"
+    "url": "git+https://github.com/gunn4r/material-ui-advanced-table.git"
   },
   "keywords": [
     "react",
@@ -35,12 +35,13 @@
     "datatable",
     "table"
   ],
-  "author": "Mehmet Baran",
+  "author": "Gunnar Gabrielson",
+  "contributors": ["Mehmet Baran"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mbrn/material-table/issues"
+    "url": "https://github.com/gunn4r/material-ui-advanced-table/issues"
   },
-  "homepage": "https://github.com/mbrn/material-table#readme",
+  "homepage": "https://github.com/gunn4r/material-ui-advanced-table#readme",
   "devDependencies": {
     "@babel/cli": "7.1.2",
     "@babel/core": "7.4.4",
@@ -81,5 +82,8 @@
     "prop-types": "^15.6.2",
     "react-beautiful-dnd": "11.0.3",
     "react-double-scrollbar": "0.0.15"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.5"
   }
 }
