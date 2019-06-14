@@ -1,6 +1,6 @@
 import { Checkbox, TableCell, TableRow, IconButton, Icon, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 
 export default class MTableBodyRow extends React.Component<any, any> {
   renderColumns() {

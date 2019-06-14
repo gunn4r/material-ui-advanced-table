@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { defaultProps } from './default-props';
 import { propTypes } from './propTypes';
 import MaterialTable from './material-table';

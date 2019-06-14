@@ -15,7 +15,7 @@ import { lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 import { CsvBuilder } from 'filefy';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 
 export class MTableToolbar extends React.Component<any, any> {
   constructor(props) {

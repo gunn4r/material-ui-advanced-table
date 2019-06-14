@@ -1,10 +1,17 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  TableCell, TableRow, TextField,
-  FormControl, Select, Input,
-  MenuItem, Checkbox, ListItemText,
-  InputAdornment, Icon, Tooltip,
+  TableCell,
+  TableRow,
+  TextField,
+  FormControl,
+  Select,
+  Input,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  InputAdornment,
+  Tooltip,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';

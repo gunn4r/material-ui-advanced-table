@@ -1,6 +1,6 @@
 import { TableCell, TableRow, IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 
 export default class MTableGroupRow extends React.Component<any, any> {
 

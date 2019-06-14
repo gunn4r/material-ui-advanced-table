@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { TextField, Checkbox, Select, MenuItem } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
