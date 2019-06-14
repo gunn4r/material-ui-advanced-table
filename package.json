@@ -68,11 +68,6 @@
       "**/dist/**"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gunn4r/material-ui-advanced-table.git"
