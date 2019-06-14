@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import { defaultProps } from './default-props';
-import { propTypes } from './prop-types';
+import { propTypes } from './propTypes';
 import MaterialTable from './material-table';
 import { withStyles } from '@material-ui/core';
 
-MaterialTable.defaultProps = defaultProps;
-MaterialTable.propTypes = propTypes;
+(MaterialTable as any).defaultProps = defaultProps;
+(MaterialTable as any).propTypes = propTypes;
 
-const styles = theme => ({
+const styles = () => ({
   paginationRoot: {
     width: '100%'
   },
@@ -24,5 +24,5 @@ const styles = theme => ({
 });
 
 
-export default withStyles(styles, { withTheme: true })(props => <MaterialTable {...props} ref={props.tableRef} />);
+export default withStyles(styles, { withTheme: true })((props: any) => <MaterialTable {...props} ref={props.tableRef} />);
 export * from './components';

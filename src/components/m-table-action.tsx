@@ -2,9 +2,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, IconButton, Tooltip } from '@material-ui/core';
-/* eslint-enable no-unused-vars */
 
-class MTableAction extends React.Component {
+class MTableAction extends React.Component<any, any> {
   render() {
     let action = this.props.action;
     if (typeof action === 'function') {
@@ -37,7 +36,7 @@ class MTableAction extends React.Component {
           ) : (
               <action.icon
                 {...action.iconProps}
-                disabled={action.disabled}                
+                disabled={action.disabled}
               />
             )
           }
@@ -53,12 +52,12 @@ class MTableAction extends React.Component {
   }
 }
 
-MTableAction.defaultProps = {
+(MTableAction as any).defaultProps = {
   action: {},
   data: {}
 };
 
-MTableAction.propTypes = {
+(MTableAction as any).propTypes = {
   action: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
 };

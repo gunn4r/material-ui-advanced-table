@@ -5,7 +5,7 @@ import * as React from 'react';
 /* eslint-enable no-unused-vars */
 
 
-export default class MTableGroupRow extends React.Component {
+export default class MTableGroupRow extends React.Component<any, any> {
 
   rotateIconStyle = isOpen => ({
     transform: isOpen ? 'rotate(90deg)' : 'none'
@@ -13,7 +13,7 @@ export default class MTableGroupRow extends React.Component {
 
   render() {
     let colSpan = this.props.columns.filter(columnDef => !columnDef.hidden).length;
-    this.props.options.selection && colSpan++;    
+    this.props.options.selection && colSpan++;
     this.props.detailPanel && colSpan++;
     this.props.actions && this.props.actions.length > 0 && colSpan++;
     const column = this.props.groups[this.props.level];
@@ -24,13 +24,13 @@ export default class MTableGroupRow extends React.Component {
         detail = this.props.groupData.groups.map((groupData, index) => (
           <this.props.components.GroupRow
             actions={this.props.actions}
-            key={groupData.value || ("" + index)}
+            key={groupData.value || String(index)}
             columns={this.props.columns}
             components={this.props.components}
             detailPanel={this.props.detailPanel}
             getFieldValue={this.props.getFieldValue}
             groupData={groupData}
-            groups={this.props.groups}            
+            groups={this.props.groups}
             icons={this.props.icons}
             level={this.props.level + 1}
             path={[...this.props.path, index]}
@@ -73,7 +73,7 @@ export default class MTableGroupRow extends React.Component {
       }
     }
 
-    const freeCells = [];
+    const freeCells: any[] = [];
     for (let i = 0; i < this.props.level; i++) {
       freeCells.push(<TableCell padding="checkbox" />);
     }
@@ -87,10 +87,10 @@ export default class MTableGroupRow extends React.Component {
       <>
         <TableRow>
           {freeCells}
-          <this.props.components.Cell 
-            colSpan={colSpan} 
-            padding="none" 
-            columnDef={column} 
+          <this.props.components.Cell
+            colSpan={colSpan}
+            padding="none"
+            columnDef={column}
             value={value}
             icons={this.props.icons}
           >
@@ -111,14 +111,14 @@ export default class MTableGroupRow extends React.Component {
   }
 }
 
-MTableGroupRow.defaultProps = {
+(MTableGroupRow as any).defaultProps = {
   columns: [],
   groups: [],
   options: {},
   level: 0
 };
 
-MTableGroupRow.propTypes = {
+(MTableGroupRow as any).propTypes = {
   actions: PropTypes.array,
   columns: PropTypes.arrayOf(PropTypes.object),
   components: PropTypes.object,
@@ -132,7 +132,7 @@ MTableGroupRow.propTypes = {
   level: PropTypes.number,
   onGroupExpandChanged: PropTypes.func,
   onRowSelected: PropTypes.func,
-  onRowClick: PropTypes.func,  
+  onRowClick: PropTypes.func,
   onToggleDetailPanel: PropTypes.func.isRequired,
   onTreeExpandChanged: PropTypes.func.isRequired,
   onEditingCanceled: PropTypes.func,

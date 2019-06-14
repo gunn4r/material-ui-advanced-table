@@ -2,6 +2,8 @@ import * as React from 'react';
 import { IconProps } from '@material-ui/core/Icon';
 import { string } from 'prop-types';
 
+declare var __DEV__: boolean
+
 export interface MaterialTableProps {
   actions?: (Action | ((rowData: any) => Action))[];
   columns: Column[];

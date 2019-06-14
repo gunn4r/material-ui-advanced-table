@@ -8,7 +8,7 @@ import DataManager from './utils/data-manager';
 import { debounce } from 'debounce';
 /* eslint-enable no-unused-vars */
 
-export default class MaterialTable extends React.Component {
+export default class MaterialTable extends React.Component<any, any> {
   dataManager = new DataManager();
 
   constructor(props) {
@@ -23,13 +23,13 @@ export default class MaterialTable extends React.Component {
       ...renderState,
       query: {
         filters: renderState.columns
-          .filter(a => a.tableData.filterValue)
-          .map(a => ({
+          .filter((a: any) => a.tableData.filterValue)
+          .map((a: any) => ({
             column: a,
             operator: "=",
             value: a.tableData.filterValue
           })),
-        orderBy: renderState.columns.find(a => a.tableData.id === renderState.orderBy),
+        orderBy: renderState.columns.find((a: any) => a.tableData.id === renderState.orderBy),
         orderDirection: renderState.orderDirection,
         page: 0,
         pageSize: calculatedProps.options.pageSize,
@@ -49,7 +49,7 @@ export default class MaterialTable extends React.Component {
     });
   }
 
-  setDataManagerFields(props, isInit) {
+  setDataManagerFields(props?: any, isInit?: any) {
     let defaultSortColumnIndex = -1;
     let defaultSortDirection = '';
     if (props) {
@@ -84,7 +84,7 @@ export default class MaterialTable extends React.Component {
     this.setState(this.dataManager.getRenderState());
   }
 
-  getProps(props) {
+  getProps(props?: any) {
     const calculatedProps = { ...(props || this.props) };
 
     const localization = calculatedProps.localization.body;
@@ -135,14 +135,14 @@ export default class MaterialTable extends React.Component {
       }
     }
 
-    calculatedProps.components = { ...MaterialTable.defaultProps.components, ...calculatedProps.components };
-    calculatedProps.icons = { ...MaterialTable.defaultProps.icons, ...calculatedProps.icons };
-    calculatedProps.options = { ...MaterialTable.defaultProps.options, ...calculatedProps.options };
+    calculatedProps.components = { ...(MaterialTable as any).defaultProps.components, ...calculatedProps.components };
+    calculatedProps.icons = { ...(MaterialTable as any).defaultProps.icons, ...calculatedProps.icons };
+    calculatedProps.options = { ...(MaterialTable as any).defaultProps.options, ...calculatedProps.options };
 
     return calculatedProps;
   }
 
-  isRemoteData = (props) => !Array.isArray((props || this.props).data)
+  isRemoteData = (props?: any) => !Array.isArray((props || this.props).data)
 
   onAllSelected = (checked) => {
     this.dataManager.changeAllSelected(checked);
@@ -306,7 +306,7 @@ export default class MaterialTable extends React.Component {
     }
   }
 
-  onQueryChange = (query, callback) => {
+  onQueryChange = (query?: any, callback?: any) => {
     query = { ...this.state.query, ...query };
 
     this.setState({ isLoading: true }, () => {
@@ -330,12 +330,12 @@ export default class MaterialTable extends React.Component {
     this.setState(this.dataManager.getRenderState(), () => this.onSelectionChange(dataClicked));
   }
 
-  onSelectionChange = (dataClicked) => {
+  onSelectionChange = (dataClicked?: any) => {
     if (this.props.onSelectionChange) {
-      const selectedRows = [];
+      const selectedRows: any[] = [];
 
       const findSelecteds = list => {
-        list.forEach(row => {
+        list.forEach((row: any) => {
           if (row.tableData.checked) {
             selectedRows.push(row);
           }
@@ -404,7 +404,7 @@ export default class MaterialTable extends React.Component {
   renderFooter() {
     const props = this.getProps();
     if (props.options.paging) {
-      const localization = { ...MaterialTable.defaultProps.localization.pagination, ...this.props.localization.pagination };
+      const localization = { ...(MaterialTable as any).defaultProps.localization.pagination, ...this.props.localization.pagination };
       return (
         <Table>
           <TableFooter style={{ display: 'grid' }}>
@@ -473,13 +473,13 @@ export default class MaterialTable extends React.Component {
               title={props.title}
               onSearchChanged={this.onSearchChange}
               onColumnsChanged={this.onChangeColumnHidden}
-              localization={{ ...MaterialTable.defaultProps.localization.toolbar, ...this.props.localization.toolbar }}
+              localization={{ ...(MaterialTable as any).defaultProps.localization.toolbar, ...this.props.localization.toolbar }}
             />
           }
           {props.options.grouping &&
             <props.components.Groupbar
               icons={props.icons}
-              localization={{ ...MaterialTable.defaultProps.localization.grouping, ...props.localization.grouping }}
+              localization={{ ...(MaterialTable as any).defaultProps.localization.grouping, ...props.localization.grouping }}
               groupColumns={this.state.columns
                 .filter(col => col.tableData.groupOrder > -1)
                 .sort((col1, col2) => col1.tableData.groupOrder - col2.tableData.groupOrder)
@@ -496,13 +496,13 @@ export default class MaterialTable extends React.Component {
                     <Table>
                       {props.options.header &&
                         <props.components.Header
-                          localization={{ ...MaterialTable.defaultProps.localization.header, ...this.props.localization.header }}
+                          localization={{ ...(MaterialTable as any).defaultProps.localization.header, ...this.props.localization.header }}
                           columns={this.state.columns}
                           hasSelection={props.options.selection}
                           headerStyle={props.options.headerStyle}
                           selectedCount={this.state.selectedCount}
                           dataCount={props.parentChildData ? this.state.treefiedDataLength : this.state.data.length}
-                          hasDetailPanel={!!props.detailPanel}
+                          hasDetailPanel={Boolean(props.detailPanel)}
                           detailPanelColumnAlignment={props.options.detailPanelColumnAlignment}
                           showActionsColumn={props.actions && props.actions.filter(a => !a.isFreeAction && !this.props.options.selection).length > 0}
                           showSelectAllCheckbox={props.options.showSelectAllCheckbox}
@@ -536,11 +536,11 @@ export default class MaterialTable extends React.Component {
                         onTreeExpandChanged={this.onTreeExpandChanged}
                         onEditingCanceled={this.onEditingCanceled}
                         onEditingApproved={this.onEditingApproved}
-                        localization={{ ...MaterialTable.defaultProps.localization.body, ...this.props.localization.body }}
+                        localization={{ ...(MaterialTable as any).defaultProps.localization.body, ...this.props.localization.body }}
                         onRowClick={this.props.onRowClick}
                         showAddRow={this.state.showAddRow}
-                        hasAnyEditingRow={!!(this.state.lastEditingRow || this.state.showAddRow)}
-                        hasDetailPanel={!!props.detailPanel}
+                        hasAnyEditingRow={Boolean(this.state.lastEditingRow || this.state.showAddRow)}
+                        hasDetailPanel={Boolean(props.detailPanel)}
                         treeDataMaxLevel={this.state.treeDataMaxLevel}
                       />
                     </Table>

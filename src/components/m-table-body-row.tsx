@@ -2,10 +2,8 @@
 import { Checkbox, TableCell, TableRow, IconButton, Icon, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-/* eslint-enable no-unused-vars */
 
-
-export default class MTableBodyRow extends React.Component {
+export default class MTableBodyRow extends React.Component<any, any> {
   renderColumns() {
     const mapArr = this.props.columns.filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
@@ -42,7 +40,7 @@ export default class MTableBodyRow extends React.Component {
 
     return (
       <TableCell padding="none" key="key-selection-column" style={{ width: 42 + 9 * (this.props.treeDataMaxLevel - 1) }}>
-        <Checkbox        
+        <Checkbox
           checked={this.props.data.tableData.checked === true}
           onClick={(e) => e.stopPropagation()}
           value={this.props.data.tableData.id.toString()}
@@ -62,7 +60,7 @@ export default class MTableBodyRow extends React.Component {
 
   renderDetailPanelColumn() {
 
-    const CustomIcon = ({ icon, style }) => typeof icon === "string" ? <Icon style={style}>{icon}</Icon> : React.createElement(icon, { style });
+    const CustomIcon: React.FC<any> = ({ icon, style }) => typeof icon === "string" ? <Icon style={style}>{icon}</Icon> : React.createElement(icon, { style });
 
     if (typeof this.props.detailPanel == 'function') {
       return (
@@ -133,7 +131,7 @@ export default class MTableBodyRow extends React.Component {
   }
 
   getStyle(index) {
-    let style = {
+    let style: any = {
       transition: 'all ease 300ms',
     };
 
@@ -309,7 +307,7 @@ export default class MTableBodyRow extends React.Component {
   }
 }
 
-MTableBodyRow.defaultProps = {
+(MTableBodyRow as any).defaultProps = {
   actions: [],
   index: 0,
   data: {},
@@ -317,7 +315,7 @@ MTableBodyRow.defaultProps = {
   path: []
 };
 
-MTableBodyRow.propTypes = {
+(MTableBodyRow as any).propTypes = {
   actions: PropTypes.array,
   icons: PropTypes.any.isRequired,
   index: PropTypes.number.isRequired,

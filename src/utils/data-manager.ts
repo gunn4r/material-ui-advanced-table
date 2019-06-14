@@ -5,30 +5,30 @@ export default class DataManager {
   applyFilters = false;
   applySearch = false;
   currentPage = 0;
-  detailPanelType = 'multiple'  
-  lastDetailPanelRow = undefined;
-  lastEditingRow = undefined;
+  detailPanelType = 'multiple'
+  lastDetailPanelRow: any = undefined;
+  lastEditingRow: any = undefined;
   orderBy = -1;
   orderDirection = '';
   pageSize = 5;
   paging = true;
-  parentFunc = null;
+  parentFunc: any = null;
   searchText = '';
   selectedCount = 0;
   treefiedDataLength = 0;
   treeDataMaxLevel = 0;
   defaultExpanded = false;
 
-  data = [];
-  columns = [];
+  data: any[] = [];
+  columns: any[] = [];
 
-  filteredData = [];
-  searchedData = [];
-  groupedData = [];
-  treefiedData = [];
-  sortedData = [];
-  pagedData = [];
-  renderData = [];
+  filteredData: any[] = [];
+  searchedData: any[] = [];
+  groupedData: any[] = [];
+  treefiedData: any[] = [];
+  sortedData: any[] = [];
+  pagedData: any[] = [];
+  renderData: any[] = [];
 
   filtered = false;
   searched = false;
@@ -37,10 +37,7 @@ export default class DataManager {
   sorted = false;
   paged = false;
 
-  rootGroupsIndex = {};
-
-  constructor() {
-  }
+  rootGroupsIndex: any = {};
 
   setData(data) {
     this.selectedCount = 0;
@@ -155,7 +152,7 @@ export default class DataManager {
     this.searched = false;
   }
 
-  changeRowEditing(rowData, mode) {
+  changeRowEditing(rowData?: any, mode?: any) {
     if (rowData) {
       rowData.tableData.editing = mode;
 
@@ -272,7 +269,7 @@ export default class DataManager {
       if(newGroup.grouping === false || !newGroup.field){
         return;
       }
-      
+
       groups.splice(result.destination.index, 0, newGroup);
     }
     else if (result.destination.droppableId === "headers" && result.source.droppableId === "groups") {
@@ -478,7 +475,7 @@ export default class DataManager {
       this.columns.filter(columnDef => columnDef.tableData.filterValue).forEach(columnDef => {
         const { lookup, type, tableData } = columnDef;
         if (columnDef.customFilterAndSearch) {
-          this.filteredData = this.filteredData.filter(row => !!columnDef.customFilterAndSearch(tableData.filterValue, row, columnDef));
+          this.filteredData = this.filteredData.filter(row => Boolean(columnDef.customFilterAndSearch(tableData.filterValue, row, columnDef)));
         }
         else {
           if (lookup) {
@@ -491,7 +488,7 @@ export default class DataManager {
           } else if (type === 'numeric') {
             this.filteredData = this.filteredData.filter(row => {
               const value = this.getFieldValue(row, columnDef);
-              return (value + "") === tableData.filterValue;
+              return (String(value)) === tableData.filterValue;
             });
           } else if (type === 'boolean' && tableData.filterValue) {
             this.filteredData = this.filteredData.filter(row => {
@@ -561,7 +558,7 @@ export default class DataManager {
           .filter(columnDef => { return columnDef.searchable === undefined ? !columnDef.hidden : columnDef.searchable })
           .some(columnDef => {
             if (columnDef.customFilterAndSearch) {
-              return !!columnDef.customFilterAndSearch(this.searchText, row, columnDef);
+              return Boolean(columnDef.customFilterAndSearch(this.searchText, row, columnDef));
             }
             else if (columnDef.field) {
               const value = this.getFieldValue(row, columnDef);

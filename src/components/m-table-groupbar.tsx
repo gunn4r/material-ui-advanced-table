@@ -6,7 +6,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 /* eslint-enable no-unused-vars */
 
 
-class MTableGroupbar extends React.Component {
+class MTableGroupbar extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,10 +103,10 @@ class MTableGroupbar extends React.Component {
   }
 }
 
-MTableGroupbar.defaultProps = {
+(MTableGroupbar as any).defaultProps = {
 };
 
-MTableGroupbar.propTypes = {
+(MTableGroupbar as any).propTypes = {
   localization: PropTypes.shape({
     groupedBy: PropTypes.string,
     placeholder: PropTypes.string
