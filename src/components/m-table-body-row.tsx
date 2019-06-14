@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Checkbox, TableCell, TableRow, IconButton, Icon, Tooltip } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import * as React from 'react';

@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-/* eslint-enable no-unused-vars */
 
 class MTableActions extends React.Component<any, any> {
 

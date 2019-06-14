@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { Icon, TableCell } from '@material-ui/core';
 import PropTypes from 'prop-types';
-/* eslint-enable no-unused-vars */
 
 export default class MTableCell extends React.Component<any, any> {
   getRenderValue() {

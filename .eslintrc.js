@@ -21,10 +21,10 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:react/recommended',
-    'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
-    'prettier/standard', // disables standard linting rules that conflict with prettier
+    // 'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    // 'prettier/standard', // disables standard linting rules that conflict with prettier
     'prettier/@typescript-eslint',  // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-    'prettier/react', // disables react-specific linting rules that conflict with prettier
+    // 'prettier/react', // disables react-specific linting rules that conflict with prettier
   ],
 
   env: {
@@ -332,12 +332,6 @@ module.exports = {
       },
     ],
 
-    // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-
-    'prettier/prettier': 'off',
-
     // Turn off checking on these:
     'max-len': 'off',
     'no-underscore-dangle': 'off',
@@ -359,5 +353,14 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/jsx-indent': 'off',
     'react/jsx-indent-props': 'off',
+
+    // https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+
+    'prettier/prettier': [
+      'off',
+      {"parser": "typescript"}
+    ],
   }
 };

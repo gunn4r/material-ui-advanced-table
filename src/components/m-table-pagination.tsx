@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { Icon, IconButton, withStyles, Tooltip, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-/* eslint-enable no-unused-vars */
 
 class MTablePaginationInner extends React.Component<any, any> {
   handleFirstPageButtonClick = event => {

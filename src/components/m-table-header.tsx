@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -6,7 +5,6 @@ import {
   TableSortLabel, Checkbox, withStyles, createStyles
 } from '@material-ui/core';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-/* eslint-enable no-unused-vars */
 
 export class MTableHeader extends React.Component<any, any> {
   renderHeader() {

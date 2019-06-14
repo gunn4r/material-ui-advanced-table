@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Table, TableFooter, TableRow, LinearProgress } from '@material-ui/core';
 import DoubleScrollbar from "react-double-scrollbar";
 import * as React from 'react';
@@ -6,7 +5,6 @@ import { MTablePagination, MTableSteppedPagination } from './components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import DataManager from './utils/data-manager';
 import { debounce } from 'debounce';
-/* eslint-enable no-unused-vars */
 
 export default class MaterialTable extends React.Component<any, any> {
   dataManager = new DataManager();

@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { TableCell, TableRow, IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-/* eslint-enable no-unused-vars */
-
 
 export default class MTableGroupRow extends React.Component<any, any> {
 
