@@ -43,6 +43,10 @@ module.exports = {
     },
   },
 
+  globals: {
+    '__DEV__': 'readonly'
+  },
+
   settings: {
     react: {
       version: 'detect',
