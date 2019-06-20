@@ -17,16 +17,28 @@
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production tsdx build --format=umd,esm,cjs",
     "prepublishOnly": "npm run build",
-    "size": "size-limit"
+    "size": "size-limit",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "rimraf ./.storybook-static && build-storybook -c .storybook -o .storybook-static",
+    "deploy-storybook": "npm run build-storybook && storybook-to-ghpages --e=./.storybook-static"
   },
   "devDependencies": {
     "@babel/core": "7.4.5",
+    "@material-ui/core": "^4.1.1",
+    "@material-ui/pickers": "^3.1.1",
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@types/jest": "^24.0.15",
     "@types/react": "^16.8.21",
     "@types/react-dom": "^16.8.4",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
     "confusing-browser-globals": "^1.0.7",
     "cross-env": "^5.2.0",
     "eslint": "5.16.0",
@@ -37,16 +49,21 @@
     "eslint-plugin-react": "7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "husky": "^2.4.1",
-    "install-peers": "^1.0.3",
     "lint-staged": "^8.2.1",
+    "material-icons": "^0.3.1",
     "prettier": "^1.18.2",
+    "prop-types": "^15.7.2",
+    "raw-loader": "^3.0.0",
     "react": "^16.8.6",
+    "react-beautiful-dnd": "^11.0.4",
     "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",
     "size-limit": "^1.3.7",
     "tsdx": "0.7.2",
     "tslib": "^1.10.0",
-    "typescript": "3.5.2"
+    "typeface-roboto": "0.0.54",
+    "typescript": "3.5.2",
+    "webpack": "^4.35.0"
   },
   "dependencies": {
     "@date-io/date-fns": "^1.3.7",
@@ -62,7 +79,7 @@
     "@material-ui/core": "^4.0.0",
     "@material-ui/pickers": "^3.0.0",
     "prop-types": "^15.7.2",
-    "react-beautiful-dnd": "11.0.4"
+    "react-beautiful-dnd": "^11.0.4"
   },
   "lint-staged": {
     "operator/**/*.{js,jsx,ts,tsx}": [
@@ -91,15 +108,15 @@
   "size-limit": [
     {
       "path": "./dist/index.js",
-      "limit": "70 kB"
+      "limit": "30 kB"
     },
     {
       "path": "./dist/material-ui-advanced-table.esm.js",
-      "limit": "70 kB"
+      "limit": "30 kB"
     },
     {
       "path": "./dist/material-ui-advanced-table.umd.production.min.js",
-      "limit": "70 kB"
+      "limit": "30 kB"
     }
   ],
   "eslintIgnore": [
