@@ -1,11 +1,14 @@
-import { Grid, MuiThemeProvider, Button } from '@material-ui/core';
+import 'react-app-polyfill/ie11';
+
+import { Grid } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MaterialTable from '../src';
 
-let direction = 'ltr';
-// direction = 'rtl';
+let direction: 'ltr' | 'rtl' = 'ltr';
+
 const theme = createMuiTheme({
   direction: direction,
   palette: {
@@ -13,7 +16,7 @@ const theme = createMuiTheme({
   }
 });
 
-const bigData = [];
+const bigData: any[] = [];
 for (let i = 0; i < 1; i++) {
   const d = {
     id: i + 1,
@@ -30,9 +33,9 @@ for (let i = 0; i < 1; i++) {
   bigData.push(d);
 }
 
-class App extends Component {
-  tableRef = React.createRef();
-
+class App extends Component<any, any> {
+  inputBProps: any;
+  tableRef: any = React.createRef();
   colRenderCount = 0;
 
   state = {
@@ -158,7 +161,5 @@ class App extends Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('app')
+  document.getElementById('root')
 );
-
-module.hot.accept();

@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
 import { Checkbox, TableCell, TableRow, IconButton, Icon, Tooltip, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 import { byString, setByString } from '../utils';
-/* eslint-enable no-unused-vars */
 
 
-export default class MTableEditRow extends React.Component {
+export default class MTableEditRow extends React.Component<any, any> {
 
   constructor(props) {
     super(props);
@@ -20,7 +18,7 @@ export default class MTableEditRow extends React.Component {
     const mapArr = this.props.columns.filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
       .map((columnDef, index) => {
         const value = (typeof this.state.data[columnDef.field] !== 'undefined' ? this.state.data[columnDef.field] : byString(this.state.data, columnDef.field));
-        const style = {};
+        const style: any = {};
         if (index === 0) {
           style.paddingLeft = 24 + this.props.level * 20;
         }
@@ -82,7 +80,7 @@ export default class MTableEditRow extends React.Component {
   }
 
   renderActions() {
-    const localization = { ...MTableEditRow.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableEditRow as any).defaultProps.localization, ...this.props.localization };
     const actions = [
       {
         icon: this.props.icons.Check,
@@ -120,7 +118,7 @@ export default class MTableEditRow extends React.Component {
   }
 
   render() {
-    const localization = { ...MTableEditRow.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableEditRow as any).defaultProps.localization, ...this.props.localization };
 
     let columns;
     if (this.props.mode === "add" || this.props.mode === "update") {
@@ -200,7 +198,7 @@ export default class MTableEditRow extends React.Component {
   }
 }
 
-MTableEditRow.defaultProps = {
+(MTableEditRow as any).defaultProps = {
   actions: [],
   index: 0,
   options: {},
@@ -212,7 +210,7 @@ MTableEditRow.defaultProps = {
   }
 };
 
-MTableEditRow.propTypes = {
+(MTableEditRow as any).propTypes = {
   actions: PropTypes.array,
   icons: PropTypes.any.isRequired,
   index: PropTypes.number.isRequired,

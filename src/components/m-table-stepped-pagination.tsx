@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { Icon, IconButton, withStyles, Tooltip, Hidden, Typography, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import * as React from 'react';
-/* eslint-enable no-unused-vars */
+import React from 'react';
 
-class MTablePaginationInner extends React.Component {
+class MTablePaginationInner extends React.Component<any, any> {
   handleFirstPageButtonClick = event => {
     this.props.onChangePage(event, 0);
   };
@@ -29,10 +27,10 @@ class MTablePaginationInner extends React.Component {
   };
 
   renderPagesButton(start, end) {
-    const buttons = [];
+    const buttons: any[] = [];
 
     for (let p = start; p <= end; p++) {
-      const buttonVariant = p === this.props.page ? "contained" : "default";
+      const buttonVariant = p === this.props.page ? "contained" : undefined;
       buttons.push(
         <Button
           size="small"
@@ -55,7 +53,7 @@ class MTablePaginationInner extends React.Component {
   render() {
     const { classes, count, page, rowsPerPage } = this.props;
 
-    const localization = { ...MTablePaginationInner.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTablePaginationInner as any).defaultProps.localization, ...this.props.localization };
     const maxPages = Math.ceil(count / rowsPerPage) - 1;
 
     const pageStart = Math.max(page - 1, 0);
@@ -74,7 +72,7 @@ class MTablePaginationInner extends React.Component {
             </IconButton>
           </span>
         </Tooltip>
-        <Hidden smDown={true}>
+        <Hidden smDown>
           {this.renderPagesButton(pageStart, pageEnd)}
         </Hidden>
         <Tooltip title={localization.nextTooltip}>
@@ -101,7 +99,7 @@ const actionsStyles = theme => ({
   }
 });
 
-MTablePaginationInner.propTypes = {
+(MTablePaginationInner as any).propTypes = {
   onChangePage: PropTypes.func,
   page: PropTypes.number,
   count: PropTypes.number,
@@ -110,7 +108,7 @@ MTablePaginationInner.propTypes = {
   localization: PropTypes.object
 };
 
-MTablePaginationInner.defaultProps = {
+(MTablePaginationInner as any).defaultProps = {
   localization: {
     previousTooltip: 'Previous Page',
     nextTooltip: 'Next Page',

@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-import * as React from 'react';
+import React from 'react';
 import { Icon, TableCell } from '@material-ui/core';
 import PropTypes from 'prop-types';
-/* eslint-enable no-unused-vars */
 
-export default class MTableCell extends React.Component {
+export default class MTableCell extends React.Component<any, any> {
   getRenderValue() {
     if (this.props.columnDef.emptyValue !== undefined && (this.props.value === undefined || this.props.value === null)) {
       return this.getEmptyValue(this.props.columnDef.emptyValue);
@@ -16,7 +14,7 @@ export default class MTableCell extends React.Component {
       else {
         return this.props.columnDef.render(this.props.value, 'group');
       }
-      
+
     } else if (this.props.columnDef.type === 'boolean') {
       const style = { textAlign: 'left', verticalAlign: 'middle', width: 48 };
       if (this.props.value) {
@@ -78,7 +76,7 @@ export default class MTableCell extends React.Component {
   }
 
   getStyle = () => {
-    let cellStyle = {};
+    let cellStyle: any = {};
 
     if (typeof this.props.columnDef.cellStyle === 'function') {
       cellStyle = { ...cellStyle, ...this.props.columnDef.cellStyle(this.props.value, this.props.rowData) };
@@ -111,12 +109,12 @@ export default class MTableCell extends React.Component {
   }
 }
 
-MTableCell.defaultProps = {
+(MTableCell as any).defaultProps = {
   columnDef: {},
   value: undefined
 };
 
-MTableCell.propTypes = {
+(MTableCell as any).propTypes = {
   columnDef: PropTypes.object.isRequired,
   value: PropTypes.any,
   rowData: PropTypes.object

@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
 import { TableBody, TableCell, TableRow } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import * as React from 'react';
-/* eslint-enable no-unused-vars */
+import React from 'react';
 
-class MTableBody extends React.Component {
+class MTableBody extends React.Component<any, any> {
   renderEmpty(emptyRowCount, renderData) {
-    const localization = { ...MTableBody.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableBody as any).defaultProps.localization, ...this.props.localization };
     if (this.props.options.showEmptyDataSourceMessage && renderData.length === 0) {
       let addColumn = 0;
       if (this.props.options.selection || (this.props.actions && this.props.actions.filter(a => !a.isFreeAction && !this.props.options.selection).length > 0)) {
@@ -44,7 +42,7 @@ class MTableBody extends React.Component {
             components={this.props.components}
             data={data}
             icons={this.props.icons}
-            localization={{ ...MTableBody.defaultProps.localization.editRow, ...this.props.localization.editRow }}
+            localization={{ ...(MTableBody as any).defaultProps.localization.editRow, ...this.props.localization.editRow }}
             key={index}
             mode={data.tableData.editing}
             options={this.props.options}
@@ -65,7 +63,7 @@ class MTableBody extends React.Component {
             key={"row-" + data.tableData.id}
             level={0}
             options={this.props.options}
-            localization={{ ...MTableBody.defaultProps.localization.editRow, ...this.props.localization.editRow }}
+            localization={{ ...(MTableBody as any).defaultProps.localization.editRow, ...this.props.localization.editRow }}
             onRowSelected={this.props.onRowSelected}
             actions={this.props.actions}
             columns={this.props.columns}
@@ -90,7 +88,7 @@ class MTableBody extends React.Component {
     return renderData.map((groupData, index) => (
       <this.props.components.GroupRow
         actions={this.props.actions}
-        key={groupData.value == null ? ('' + index) : groupData.value}
+        key={groupData.value == null ? String(index) : groupData.value}
         columns={this.props.columns}
         components={this.props.components}
         detailPanel={this.props.detailPanel}
@@ -135,8 +133,8 @@ class MTableBody extends React.Component {
             actionsColumnIndex={this.props.options.actionsColumnIndex}
             onFilterChanged={this.props.onFilterChanged}
             selection={this.props.options.selection} 
-            localization={{ ...MTableBody.defaultProps.localization.filterRow, ...this.props.localization.filterRow }}
-            hasDetailPanel={!!this.props.detailPanel}
+            localization={{ ...(MTableBody as any).defaultProps.localization.filterRow, ...this.props.localization.filterRow }}
+            hasDetailPanel={Boolean(this.props.detailPanel)}
             isTreeData={this.props.isTreeData}
             filterCellStyle={this.props.options.filterCellStyle}
           />
@@ -150,7 +148,7 @@ class MTableBody extends React.Component {
             icons={this.props.icons}
             key="key-add-row"
             mode="add"
-            localization={{ ...MTableBody.defaultProps.localization.editRow, ...this.props.localization.editRow }}
+            localization={{ ...(MTableBody as any).defaultProps.localization.editRow, ...this.props.localization.editRow }}
             options={this.props.options}
             isTreeData={this.props.isTreeData}
             detailPanel={this.props.detailPanel}
@@ -172,7 +170,7 @@ class MTableBody extends React.Component {
             icons={this.props.icons}
             key="key-add-row"
             mode="add"
-            localization={{ ...MTableBody.defaultProps.localization.editRow, ...this.props.localization.editRow }}
+            localization={{ ...(MTableBody as any).defaultProps.localization.editRow, ...this.props.localization.editRow }}
             options={this.props.options}
             isTreeData={this.props.isTreeData}
             detailPanel={this.props.detailPanel}
@@ -186,7 +184,7 @@ class MTableBody extends React.Component {
   }
 }
 
-MTableBody.defaultProps = {
+(MTableBody as any).defaultProps = {
   actions: [],
   currentPage: 0,
   pageSize: 5,
@@ -199,7 +197,7 @@ MTableBody.defaultProps = {
   }
 };
 
-MTableBody.propTypes = {
+(MTableBody as any).propTypes = {
   actions: PropTypes.array,
   components: PropTypes.object.isRequired,
   columns: PropTypes.array.isRequired,

@@ -1,11 +1,17 @@
-/* eslint-disable no-unused-vars */
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  TableCell, TableRow, TextField,
-  FormControl, Select, Input,
-  MenuItem, Checkbox, ListItemText,
-  InputAdornment, Icon, Tooltip,
+  TableCell,
+  TableRow,
+  TextField,
+  FormControl,
+  Select,
+  Input,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  InputAdornment,
+  Tooltip,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
@@ -21,7 +27,7 @@ const MenuProps = {
   }
 };
 
-class MTableFilterRow extends React.Component {
+class MTableFilterRow extends React.Component<any, any> {
   renderLookupFilter = (columnDef) => (
     <FormControl style={{ width: '100%' }}>
       <Select
@@ -31,7 +37,7 @@ class MTableFilterRow extends React.Component {
           this.props.onFilterChanged(columnDef.tableData.id, event.target.value);
         }}
         input={<Input id="select-multiple-checkbox" />}
-        renderValue={selecteds => selecteds.map(selected => columnDef.lookup[selected]).join(', ')}
+        renderValue={(selecteds: any) => selecteds.map(selected => columnDef.lookup[selected]).join(', ')}
         MenuProps={MenuProps}
       >
         {
@@ -64,7 +70,7 @@ class MTableFilterRow extends React.Component {
   )
 
   renderDefaultFilter = (columnDef) => {
-    const localization = { ...MTableFilterRow.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableFilterRow as any).defaultProps.localization, ...this.props.localization };
     return (
       <TextField
         style={columnDef.type === 'numeric' ? { float: 'right' } : {}}
@@ -87,7 +93,7 @@ class MTableFilterRow extends React.Component {
   }
 
   renderDateTypeFilter = (columnDef) => {
-    let dateInputElement = null;
+    let dateInputElement: any = null;
     const onDateInputChange = date => this.props.onFilterChanged(columnDef.tableData.id, date);
 
     if (columnDef.type === 'date') {
@@ -154,7 +160,7 @@ class MTableFilterRow extends React.Component {
     if (this.props.selection) {
       columns.splice(0, 0, <TableCell padding="none" key="key-selection-column"/>);
     }
-    
+
     if (this.props.emptyCell && this.props.hasActions) {
       if (this.props.actionsColumnIndex === -1) {
         columns.push(<TableCell key="key-action-column" />);
@@ -194,7 +200,7 @@ class MTableFilterRow extends React.Component {
   }
 }
 
-MTableFilterRow.defaultProps = {
+(MTableFilterRow as any).defaultProps = {
   emptyCell: false,
   columns: [],
   selection: false,
@@ -204,7 +210,7 @@ MTableFilterRow.defaultProps = {
   }
 };
 
-MTableFilterRow.propTypes = {
+(MTableFilterRow as any).propTypes = {
   emptyCell: PropTypes.bool,
   columns: PropTypes.array.isRequired,
   hasDetailPanel: PropTypes.bool.isRequired,

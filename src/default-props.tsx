@@ -40,7 +40,6 @@ export const defaultProps = {
   },
   data: [],
   icons: {
-    /* eslint-disable react/display-name */
     Add: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>add_box</Icon>),
     Check: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>check</Icon>),
     Clear: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>clear</Icon>),
@@ -58,7 +57,6 @@ export const defaultProps = {
     SortArrow: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>arrow_upward</Icon>),
     ThirdStateCheck: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>remove</Icon>),
     ViewColumn: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>view_column</Icon>)
-    /* eslint-enable react/display-name */
   },
   isLoading: false,
   title: 'Table Title',

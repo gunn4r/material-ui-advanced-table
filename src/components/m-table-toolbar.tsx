@@ -1,13 +1,23 @@
-/* eslint-disable no-unused-vars */
-import { Checkbox, FormControlLabel, Icon, IconButton, InputAdornment, Menu, MenuItem, TextField, Toolbar, Tooltip, Typography, withStyles } from '@material-ui/core';
+import {
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  TextField,
+  Toolbar,
+  Tooltip,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 import classNames from 'classnames';
 import { CsvBuilder } from 'filefy';
-import PropTypes, { oneOf } from 'prop-types';
-import * as React from 'react';
-/* eslint-enable no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
 
-export class MTableToolbar extends React.Component {
+export class MTableToolbar extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +58,7 @@ export class MTableToolbar extends React.Component {
   }
 
   renderSearch() {
-    const localization = { ...MTableToolbar.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableToolbar as any).defaultProps.localization, ...this.props.localization };
     if (this.props.search) {
       return (
         <TextField
@@ -86,7 +96,7 @@ export class MTableToolbar extends React.Component {
   }
 
   renderDefaultActions() {
-    const localization = { ...MTableToolbar.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableToolbar as any).defaultProps.localization, ...this.props.localization };
     return (
       <div>
         {this.props.columnsButton &&
@@ -181,7 +191,7 @@ export class MTableToolbar extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const localization = { ...MTableToolbar.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableToolbar as any).defaultProps.localization, ...this.props.localization };
     const title =this.props.showTextRowsSelected && this.props.selectedRows && this.props.selectedRows.length  > 0 ? localization.nRowsSelected.replace('{0}', this.props.selectedRows.length) : this.props.showTitle ? this.props.title : null;
     return (
       <Toolbar className={classNames(classes.root, { [classes.highlight]: this.props.showTextRowsSelected &&this.props.selectedRows && this.props.selectedRows.length > 0 })}>
@@ -198,7 +208,7 @@ export class MTableToolbar extends React.Component {
   }
 }
 
-MTableToolbar.defaultProps = {
+(MTableToolbar as any).defaultProps = {
   actions: [],
   columns: [],
   columnsButton: false,
@@ -223,7 +233,7 @@ MTableToolbar.defaultProps = {
   title: 'No Title!'
 };
 
-MTableToolbar.propTypes = {
+(MTableToolbar as any).propTypes = {
   actions: PropTypes.array,
   columns: PropTypes.array,
   columnsButton: PropTypes.bool,
