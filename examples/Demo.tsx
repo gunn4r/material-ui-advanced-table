@@ -1,11 +1,13 @@
-import { Grid, MuiThemeProvider, Button } from '@material-ui/core';
+import 'material-icons/iconfont/material-icons.css'
+
+import { Grid } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import MaterialTable from '../src';
+import MaterialTable from 'material-ui-advanced-table';
 
-let direction = 'ltr';
-// direction = 'rtl';
+let direction: 'ltr' | 'rtl' = 'ltr';
+
 const theme = createMuiTheme({
   direction: direction,
   palette: {
@@ -13,7 +15,7 @@ const theme = createMuiTheme({
   }
 });
 
-const bigData = [];
+const bigData: any[] = [];
 for (let i = 0; i < 1; i++) {
   const d = {
     id: i + 1,
@@ -30,9 +32,9 @@ for (let i = 0; i < 1; i++) {
   bigData.push(d);
 }
 
-class App extends Component {
-  tableRef = React.createRef();
-
+class Demo extends Component<any, any> {
+  inputBProps: any;
+  tableRef: any = React.createRef();
   colRenderCount = 0;
 
   state = {
@@ -121,6 +123,7 @@ class App extends Component {
                     <img
                       style={{ height: 36, borderRadius: '50%' }}
                       src={rowData.avatar}
+                      alt="Derp"
                     />
                   ),
                 },
@@ -132,7 +135,7 @@ class App extends Component {
                 grouping: true,
                 filtering: true
               }}
-              data={query => new Promise((resolve, reject) => {
+              data={query => new Promise((resolve) => {
                 let url = 'https://reqres.in/api/users?'
                 url += 'per_page=' + query.pageSize
                 url += '&page=' + (query.page + 1)
@@ -156,9 +159,4 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
-
-module.hot.accept();
+export default Demo;

@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { TextField, Checkbox, Select, MenuItem } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from '@material-ui/pickers';
 import PropTypes from 'prop-types';
 
-class MTableEditField extends React.Component {
+class MTableEditField extends React.Component<any, any> {
   getProps() {
     const { columnDef, rowData, ...props } = this.props;
     return props;
@@ -124,7 +124,7 @@ class MTableEditField extends React.Component {
   }
 
   render() {
-    let component = "ok";
+    let component: any = "ok";
 
     if (this.props.columnDef.lookup) {
       component = this.renderLookupField();
@@ -153,7 +153,7 @@ class MTableEditField extends React.Component {
   }
 }
 
-MTableEditField.propTypes = {
+(MTableEditField as any).propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   columnDef: PropTypes.object.isRequired

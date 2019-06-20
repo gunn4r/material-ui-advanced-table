@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { Icon, Toolbar, Chip, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-/* eslint-enable no-unused-vars */
 
-
-class MTableGroupbar extends React.Component {
+class MTableGroupbar extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,10 +100,10 @@ class MTableGroupbar extends React.Component {
   }
 }
 
-MTableGroupbar.defaultProps = {
+(MTableGroupbar as any).defaultProps = {
 };
 
-MTableGroupbar.propTypes = {
+(MTableGroupbar as any).propTypes = {
   localization: PropTypes.shape({
     groupedBy: PropTypes.string,
     placeholder: PropTypes.string

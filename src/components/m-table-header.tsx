@@ -1,14 +1,12 @@
-/* eslint-disable no-unused-vars */
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   TableHead, TableRow, TableCell,
-  TableSortLabel, Checkbox, withStyles
+  TableSortLabel, Checkbox, withStyles, createStyles
 } from '@material-ui/core';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-/* eslint-enable no-unused-vars */
 
-export class MTableHeader extends React.Component {
+export class MTableHeader extends React.Component<any, any> {
   renderHeader() {
     const mapArr = this.props.columns.filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
@@ -81,7 +79,7 @@ export class MTableHeader extends React.Component {
   }
 
   renderActionsHeader() {
-    const localization = { ...MTableHeader.defaultProps.localization, ...this.props.localization };
+    const localization = { ...(MTableHeader as any).defaultProps.localization, ...this.props.localization };
     return (
       <TableCell
         key="key-actions-column"
@@ -174,7 +172,7 @@ export class MTableHeader extends React.Component {
   }
 }
 
-MTableHeader.defaultProps = {
+(MTableHeader as any).defaultProps = {
   dataCount: 0,
   hasSelection: false,
   headerStyle: {},
@@ -189,7 +187,7 @@ MTableHeader.defaultProps = {
   detailPanelColumnAlignment: "left"
 };
 
-MTableHeader.propTypes = {
+(MTableHeader as any).propTypes = {
   columns: PropTypes.array.isRequired,
   dataCount: PropTypes.number,
   hasDetailPanel: PropTypes.bool.isRequired,
@@ -209,7 +207,7 @@ MTableHeader.propTypes = {
 };
 
 
-export const styles = theme => ({
+export const styles = theme => createStyles({
   header: {
     position: 'sticky',
     top: 0,
