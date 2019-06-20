@@ -11,9 +11,9 @@ A simple and powerful Datatable for React based on [Material-UI Table](https://m
 
 </div>
 
-## Key features
+<!-- ## Key features -->
 
-- [Actions](https://gunn4r.com/material-ui-advanced-table/#/docs/features/actions)
+<!-- - [Actions](https://gunn4r.com/material-ui-advanced-table/#/docs/features/actions)
 - [Component overriding](https://gunn4r.com/material-ui-advanced-table/#/docs/features/component-overriding)
 - [Custom column rendering](https://gunn4r.com/material-ui-advanced-table/#/docs/features/custom-column-rendering)
 - [Detail Panel](https://gunn4r.com/material-ui-advanced-table/#/docs/features/detail-panel)
@@ -28,11 +28,11 @@ A simple and powerful Datatable for React based on [Material-UI Table](https://m
 - [Sorting](https://gunn4r.com/material-ui-advanced-table/#/docs/features/sorting)
 - [Styling](https://gunn4r.com/material-ui-advanced-table/#/docs/features/styling)
 - [Tree Data](https://gunn4r.com/material-ui-advanced-table/#/docs/features/tree-data)
-- and more
+- and more -->
 
 ## Demo and documentation
 
-You can access all code examples and documentation on our site [**gunn4r.com/material-ui-advanced-table**](https://gunn4r.com/material-ui-advanced-table).
+You can access all code examples and documentation via storybook [**https://gunn4r.github.io/material-ui-advanced-table/**](https://gunn4r.github.io/material-ui-advanced-table/).
 
 <!-- ## Support material-ui-advanced-table
 
