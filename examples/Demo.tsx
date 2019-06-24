@@ -62,7 +62,8 @@ class Demo extends Component<any, any> {
               }}
             />
           )
-        }
+        },
+        filterPlaceholder: 'Adı filter'
       },
       {
         title: 'Soyadı', field: 'surname', editComponent: props => {
@@ -103,8 +104,10 @@ class Demo extends Component<any, any> {
                   columns={this.state.columns}
                   data={this.state.data}
                   title="Demo Title"
+                  parentChildData={(row, rows) => rows.find(a => a.id === row.parentId)}
                   options={{
                     selection: true,
+                    filtering: 'true'
                   }}
                 />
               </Grid>
@@ -127,13 +130,13 @@ class Demo extends Component<any, any> {
                     />
                   ),
                 },
-                { title: 'Id', field: 'id' },
+                { title: 'Id', field: 'id', filterPlaceholder:'placeholder' },
                 { title: 'First Name', field: 'first_name' },
                 { title: 'Last Name', field: 'last_name' },
               ]}
               options={{
                 grouping: true,
-                filtering: true
+                filtering: true,
               }}
               data={query => new Promise((resolve) => {
                 let url = 'https://reqres.in/api/users?'

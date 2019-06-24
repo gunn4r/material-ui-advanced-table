@@ -8,7 +8,7 @@ export default class MTableCell extends React.Component<any, any> {
       return this.getEmptyValue(this.props.columnDef.emptyValue);
     }
     if (this.props.columnDef.render) {
-      if(this.props.rowData) {
+      if (this.props.rowData) {
         return this.props.columnDef.render(this.props.rowData, 'row');
       }
       else {
@@ -97,6 +97,7 @@ export default class MTableCell extends React.Component<any, any> {
 
     return (
       <TableCell
+        size={this.props.size}
         {...cellProps}
         style={this.getStyle()}
         align={['numeric'].indexOf(this.props.columnDef.type) !== -1 ? "right" : "left"}
