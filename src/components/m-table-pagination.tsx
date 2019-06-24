@@ -1,4 +1,4 @@
-import { Icon, IconButton, withStyles, Tooltip, Typography } from '@material-ui/core';
+import { IconButton, withStyles, Tooltip, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 

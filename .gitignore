@@ -1,6 +1,7 @@
 *.log
 .docz
 .DS_Store
+yarn.lock
 node_modules
 .cache
 .rts2_cache_cjs

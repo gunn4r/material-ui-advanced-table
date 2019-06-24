@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, TableCell } from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 export default class MTableCell extends React.Component<any, any> {
@@ -8,7 +8,7 @@ export default class MTableCell extends React.Component<any, any> {
       return this.getEmptyValue(this.props.columnDef.emptyValue);
     }
     if (this.props.columnDef.render) {
-      if(this.props.rowData) {
+      if (this.props.rowData) {
         return this.props.columnDef.render(this.props.rowData, 'row');
       }
       else {
@@ -97,6 +97,7 @@ export default class MTableCell extends React.Component<any, any> {
 
     return (
       <TableCell
+        size={this.props.size}
         {...cellProps}
         style={this.getStyle()}
         align={['numeric'].indexOf(this.props.columnDef.type) !== -1 ? "right" : "left"}
@@ -117,5 +118,6 @@ export default class MTableCell extends React.Component<any, any> {
 (MTableCell as any).propTypes = {
   columnDef: PropTypes.object.isRequired,
   value: PropTypes.any,
-  rowData: PropTypes.object
+  rowData: PropTypes.object,
+  size: PropTypes.string,
 };

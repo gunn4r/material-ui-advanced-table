@@ -16,6 +16,7 @@ export default class MTableEditRow extends React.Component<any, any> {
 
   renderColumns() {
     const mapArr = this.props.columns.filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
+      .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map((columnDef, index) => {
         const value = (typeof this.state.data[columnDef.field] !== 'undefined' ? this.state.data[columnDef.field] : byString(this.state.data, columnDef.field));
         const style: any = {};
@@ -39,11 +40,12 @@ export default class MTableEditRow extends React.Component<any, any> {
         }
 
         if (!columnDef.field || !allowEditing) {
+          const readonlyValue = this.props.getFieldValue(this.state.data, columnDef);
           return (
             <this.props.components.Cell
               icons={this.props.icons}
               columnDef={columnDef}
-              value={value}
+              value={readonlyValue}
               key={columnDef.tableData.id}
               rowData={this.props.data}
             />
@@ -223,5 +225,6 @@ export default class MTableEditRow extends React.Component<any, any> {
   onRowClick: PropTypes.func,
   onEditingApproved: PropTypes.func,
   onEditingCanceled: PropTypes.func,
-  localization: PropTypes.object
+  localization: PropTypes.object,
+  getFieldValue: PropTypes.func,
 };
