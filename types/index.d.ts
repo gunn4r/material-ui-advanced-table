@@ -2,6 +2,8 @@ import React, { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { IconProps } from '@material-ui/core/Icon';
 import { string } from 'prop-types';
 
+export type orderDirection = 'asc' | 'desc';
+
 export interface MaterialTableProps {
   actions?: (Action | ((rowData: any) => Action))[];
   columns: Column[];

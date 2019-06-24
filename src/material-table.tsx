@@ -142,7 +142,7 @@ export default class MaterialTable extends React.Component<any, any> {
 
   isRemoteData = (props?: any) => !Array.isArray((props || this.props).data)
 
-  onAllSelected = (checked) => {
+  onAllSelected = (checked: boolean) => {
     this.dataManager.changeAllSelected(checked);
     this.setState(this.dataManager.getRenderState(), () => this.onSelectionChange());
   }

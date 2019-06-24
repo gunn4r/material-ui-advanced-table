@@ -9,8 +9,11 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 
 import Demo from '../examples/Demo.tsx';
+import Header from '../examples/Header.tsx';
+import HeaderGunnar from '../examples/HeaderGunnar.tsx';
 
 const DemoCode = require('!raw-loader!../examples/Demo.tsx').default;
+const HeaderCode = require('!raw-loader!../examples/Header.tsx').default;
 
 const Code = props => (
   <React.Fragment>
@@ -51,5 +54,24 @@ storiesOf('Example', module)
         </main>
         <Code>{DemoCode}</Code>
       </React.Fragment>
-    );
+    )
+  })
+  .add('Header example', () => {
+    return (
+      <React.Fragment>
+        <main>
+          <Header />
+        </main>
+        <Code>{HeaderCode}</Code>
+      </React.Fragment>
+    )
+  })
+  .add('Header Gunnar', () => {
+    return (
+      <React.Fragment>
+        <main>
+          <HeaderGunnar />
+        </main>
+      </React.Fragment>
+    )
   });

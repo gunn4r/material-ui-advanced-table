@@ -5,7 +5,29 @@ import {
   TableSortLabel, Checkbox, withStyles, createStyles
 } from '@material-ui/core';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { Column, orderDirection } from '../../types';
 
+interface MTableHeaderProps {
+  columns: Column[];
+  dataCount?: number;
+  hasDetailPanel: boolean;
+  detailPanelColumnAlignment?: string;
+  hasSelection?: boolean;
+  headerStyle?: object;
+  localization?: object;
+  selectedCount?: number;
+  sorting?: boolean;
+  onAllSelected?: (checked: boolean) => void;
+  onOrderChange?: (orderBy: number, orderDirection: orderDirection) => void;
+  orderBy?: number;
+  orderDirection?: string;
+  actionsHeaderIndex?: number;
+  showActionsColumn?: boolean;
+  showSelectAllCheckbox?: boolean;
+}
+
+// TODO: change "any" in state and props to be typed correctly
+// TODO: maybe try to convert into a function
 export class MTableHeader extends React.Component<any, any> {
   renderHeader() {
     const mapArr = this.props.columns.filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
@@ -16,12 +38,11 @@ export class MTableHeader extends React.Component<any, any> {
             key={columnDef.tableData.id}
             draggableId={columnDef.tableData.id.toString()}
             index={index}>
-            {(provided, snapshot) => (
+            {(provided) => (
               <div
                 ref={provided.innerRef}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
-              // style={this.getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
               >
                 {columnDef.title}
               </div>
@@ -172,6 +193,7 @@ export class MTableHeader extends React.Component<any, any> {
   }
 }
 
+// TODO: destructing in props
 (MTableHeader as any).defaultProps = {
   dataCount: 0,
   hasSelection: false,
@@ -187,6 +209,7 @@ export class MTableHeader extends React.Component<any, any> {
   detailPanelColumnAlignment: "left"
 };
 
+// TODO: convert to interface
 (MTableHeader as any).propTypes = {
   columns: PropTypes.array.isRequired,
   dataCount: PropTypes.number,
