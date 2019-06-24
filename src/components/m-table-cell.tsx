@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, TableCell } from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 export default class MTableCell extends React.Component<any, any> {
