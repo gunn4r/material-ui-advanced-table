@@ -118,5 +118,6 @@ export default class MTableCell extends React.Component<any, any> {
 (MTableCell as any).propTypes = {
   columnDef: PropTypes.object.isRequired,
   value: PropTypes.any,
-  rowData: PropTypes.object
+  rowData: PropTypes.object,
+  size: PropTypes.string,
 };

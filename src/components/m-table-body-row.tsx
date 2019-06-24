@@ -78,7 +78,7 @@ export default class MTableBodyRow extends React.Component<any, any> {
       return (
         <TableCell size={this.getElementSize()} padding="none" key="key-detail-panel-column" style={{ width: 42, textAlign: 'center' }}>
           <IconButton
-            size={size}
+            size={this.getElementSize()}
             style={{ transition: 'all ease 200ms', ...this.rotateIconStyle(this.props.data.tableData.showDetailPanel) }}
             onClick={(event) => {
               this.props.onToggleDetailPanel(this.props.path, this.props.detailPanel);

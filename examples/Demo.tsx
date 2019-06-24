@@ -130,7 +130,7 @@ class Demo extends Component<any, any> {
                     />
                   ),
                 },
-                { title: 'Id', field: 'id', filterPlaceholder:'placeholder' },
+                { title: 'Id', field: 'id', filterPlaceholder: 'placeholder' },
                 { title: 'First Name', field: 'first_name' },
                 { title: 'Last Name', field: 'last_name' },
               ]}

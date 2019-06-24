@@ -60,7 +60,7 @@ class MTableAction extends React.Component<any, any> {
 (MTableAction as any).propTypes = {
   action: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 export default MTableAction;

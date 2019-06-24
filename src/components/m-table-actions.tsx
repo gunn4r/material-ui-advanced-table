@@ -7,7 +7,8 @@ class MTableActions extends React.Component<any, any> {
     if (this.props.actions) {
       return this.props.actions.map((action, index) => (
         <this.props.components.Action action={action} key={"action-" + index} data={this.props.data} size={this.props.size} />
-      ))}
+      ));
+    }
 
     return null;
   }
@@ -22,7 +23,7 @@ class MTableActions extends React.Component<any, any> {
   components: PropTypes.object.isRequired,
   actions: PropTypes.array.isRequired,
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 export default MTableActions;
