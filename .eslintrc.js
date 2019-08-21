@@ -1,7 +1,7 @@
 /*
-* Forked from Create React App's ES Lint rules:
-* https://github.com/facebook/create-react-app/blob/master/packages/eslint-config-react-app/index.js
-*/
+ * Forked from Create React App's ES Lint rules:
+ * https://github.com/facebook/create-react-app/blob/master/packages/eslint-config-react-app/index.js
+ */
 
 'use strict';
 
@@ -19,11 +19,11 @@ module.exports = {
   plugins: ['import', 'jsx-a11y', 'react', 'react-hooks'],
 
   extends: [
-    'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:react/recommended',
     // 'plugin:prettier/recommended',  // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
     // 'prettier/standard', // disables standard linting rules that conflict with prettier
-    'prettier/@typescript-eslint',  // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
     // 'prettier/react', // disables react-specific linting rules that conflict with prettier
   ],
 
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   globals: {
-    '__DEV__': 'readonly'
+    __DEV__: 'readonly',
   },
 
   settings: {
@@ -55,73 +55,73 @@ module.exports = {
     // See https://github.com/benmosher/eslint-plugin-import/issues/1285
     'import/extensions': allExtensions,
     'import/parsers': {
-      '@typescript-eslint/parser': tsExtensions
+      '@typescript-eslint/parser': tsExtensions,
     },
     'import/resolver': {
-      'node': {
-        'extensions': allExtensions
-      }
-    }
-  },
-
-  overrides: {
-    files: ['**/*.ts', '**/*.tsx'],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaVersion: 2018,
-      sourceType: 'module',
-      ecmaFeatures: {
-        jsx: true,
+      node: {
+        extensions: allExtensions,
       },
-
-      // typescript-eslint specific options
-      warnOnUnsupportedTypeScriptVersion: true,
-    },
-    plugins: ['@typescript-eslint'],
-    // If adding a typescript-eslint version of an existing ESLint rule,
-    // make sure to disable the ESLint rule here.
-    rules: {
-      // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
-      'default-case': 'off',
-
-      // Add TypeScript specific rules (and turn off ESLint equivalents)
-      '@typescript-eslint/no-angle-bracket-type-assertion': 'warn',
-      'no-array-constructor': 'off',
-      '@typescript-eslint/no-array-constructor': 'warn',
-      '@typescript-eslint/no-namespace': 'error',
-
-      'no-useless-constructor': 'off', // Disable base rule to use TS rule
-      '@typescript-eslint/no-useless-constructor': 'warn',
-
-      // TCN
-      '@typescript-eslint/interface-name-prefix': 'off',
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/camelcase': 'warn',
-      'no-unused-vars': 'off', // use @typescrit-eslint/no-unused-vars instead.
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        {
-          args: 'none',
-          ignoreRestSiblings: true,
-          args: 'after-used',
-          varsIgnorePattern: '^_',
-          argsIgnorePattern: '^_',
-          caughtErrors: 'none',
-        },
-      ],
-      'no-use-before-define': 'off',
-      '@typescript-eslint/no-use-before-define': 'off',
-      '@typescript-eslint/explicit-member-accessibility': 'off',
-
-      // Changed to warnings instead of errors:
-      '@typescript-eslint/no-object-literal-type-assertion': 'warn',
-      '@typescript-eslint/array-type': 'warn',
-      '@typescript-eslint/no-inferrable-types': 'warn',
-      '@typescript-eslint/no-empty-interface': 'warn',
-      '@typescript-eslint/no-var-requires': 'warn',
     },
   },
+
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+
+        // typescript-eslint specific options
+        warnOnUnsupportedTypeScriptVersion: true,
+      },
+      plugins: ['@typescript-eslint'],
+      // If adding a typescript-eslint version of an existing ESLint rule,
+      // make sure to disable the ESLint rule here.
+      rules: {
+        // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
+        'default-case': 'off',
+
+        // Add TypeScript specific rules (and turn off ESLint equivalents)
+        'no-array-constructor': 'off',
+        '@typescript-eslint/no-array-constructor': 'warn',
+        '@typescript-eslint/no-namespace': 'error',
+
+        'no-useless-constructor': 'off', // Disable base rule to use TS rule
+        '@typescript-eslint/no-useless-constructor': 'warn',
+
+        // TCN
+        '@typescript-eslint/interface-name-prefix': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/camelcase': 'warn',
+        'no-unused-vars': 'off', // use @typescrit-eslint/no-unused-vars instead.
+        '@typescript-eslint/no-unused-vars': [
+          'warn',
+          {
+            args: 'none',
+            ignoreRestSiblings: true,
+            args: 'after-used',
+            varsIgnorePattern: '^_',
+            argsIgnorePattern: '^_',
+            caughtErrors: 'none',
+          },
+        ],
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': 'off',
+        '@typescript-eslint/explicit-member-accessibility': 'off',
+
+        // Changed to warnings instead of errors:
+        '@typescript-eslint/array-type': 'warn',
+        '@typescript-eslint/no-inferrable-types': 'warn',
+        '@typescript-eslint/no-empty-interface': 'warn',
+        '@typescript-eslint/no-var-requires': 'warn',
+      },
+    },
+  ],
 
   // NOTE: When adding rules here, you need to make sure they are compatible with
   // `typescript-eslint`, as some rules such as `no-array-constructor` aren't compatible.
@@ -245,13 +245,13 @@ module.exports = {
         object: 'require',
         property: 'ensure',
         message:
-        'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
+          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
       },
       {
         object: 'System',
         property: 'import',
         message:
-        'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
+          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
       },
     ],
     'getter-return': 'warn',
@@ -317,22 +317,16 @@ module.exports = {
     'no-console': [
       'warn',
       {
-        'allow': ['error'],
+        allow: ['error'],
       },
     ],
 
-    'react/jsx-boolean-value': [
-      'error',
-      'never',
-    ],
+    'react/jsx-boolean-value': ['error', 'never'],
 
     'react/jsx-filename-extension': [
       'warn',
       {
-        'extensions': [
-          '.jsx',
-          '.tsx',
-        ],
+        extensions: ['.jsx', '.tsx'],
       },
     ],
 
@@ -340,7 +334,7 @@ module.exports = {
     'max-len': 'off',
     'no-underscore-dangle': 'off',
     'implicit-arrow-linebreak': 'off',
-    'yoda': 'off',
+    yoda: 'off',
     'newline-per-chained-call': 'off',
     'no-fallthrough': 'off',
     'padded-blocks': 'off',
@@ -362,9 +356,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
 
-    'prettier/prettier': [
-      'off',
-      {"parser": "typescript"}
-    ],
-  }
+    'prettier/prettier': ['off', { parser: 'typescript' }],
+  },
 };
