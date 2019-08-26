@@ -33,7 +33,7 @@ export class MaterialTable extends React.Component<any, any> {
         orderDirection: renderState.orderDirection,
         page: 0,
         pageSize: calculatedProps.options.pageSize,
-        search: props.searchText || renderState.searchText,
+        search: renderState.searchText,
 
         totalCount: 0,
       },
@@ -42,6 +42,9 @@ export class MaterialTable extends React.Component<any, any> {
   }
 
   componentDidMount() {
+    if (this.props.searchText) {
+      this.dataManager.changeSearchText(this.props.searchText);
+    }
     this.setState(this.dataManager.getRenderState(), () => {
       if (this.isRemoteData()) {
         this.onQueryChange(this.state.query);
@@ -67,6 +70,7 @@ export class MaterialTable extends React.Component<any, any> {
       this.dataManager.changeApplySearch(false);
       this.dataManager.changeApplyFilters(false);
     } else {
+      this.dataManager.changeSearchText(props.searchText);
       this.dataManager.changeApplySearch(true);
       this.dataManager.changeApplyFilters(true);
       this.dataManager.setData(props.data);

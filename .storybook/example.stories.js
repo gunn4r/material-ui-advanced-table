@@ -55,7 +55,7 @@ storiesOf('Example', module)
     return (
       <React.Fragment>
         <main>
-          <Demo searchText="A" noRemote />
+          <Demo searchText="Ge" noRemote />
         </main>
       </React.Fragment>
     );
