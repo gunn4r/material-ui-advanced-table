@@ -1,6 +1,10 @@
 import 'material-icons/iconfont/material-icons.css';
 import { Component } from 'react';
-declare class Demo extends Component<any, any> {
+interface DemoProps {
+    searchText?: string;
+    noRemote?: boolean;
+}
+declare class Demo extends Component<DemoProps, any> {
     inputBProps: any;
     tableRef: any;
     colRenderCount: number;

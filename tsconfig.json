@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "material-ui-advanced-table": ["dist/material-ui-advanced-table.esm.js"]
+      "material-ui-advanced-table": ["index.tsx"]
     }
   }
 }

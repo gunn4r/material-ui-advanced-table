@@ -16,9 +16,7 @@ const Code = props => (
   <React.Fragment>
     <Divider style={{ marginTop: '18px' }} />
     <Box mt={2} p={2} boxShadow={2} bgcolor="background.paper">
-      <Typography variant="subtitle2">
-        EXAMPLE CODE
-      </Typography>
+      <Typography variant="subtitle2">EXAMPLE CODE</Typography>
       <Box
         component="pre"
         p={1}
@@ -35,7 +33,7 @@ const Code = props => (
 const MUIWrapper = storyFn => (
   <React.Fragment>
     <CssBaseline />
-    <Container maxWidth="xl" style={{ padding: '18px 0'}}>
+    <Container maxWidth="xl" style={{ padding: '18px 0' }}>
       {storyFn()}
     </Container>
   </React.Fragment>
@@ -50,6 +48,15 @@ storiesOf('Example', module)
           <Demo />
         </main>
         <Code>{DemoCode}</Code>
+      </React.Fragment>
+    );
+  })
+  .add('Search Text Props', () => {
+    return (
+      <React.Fragment>
+        <main>
+          <Demo searchText="A" noRemote />
+        </main>
       </React.Fragment>
     );
   });

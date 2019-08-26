@@ -32,7 +32,12 @@ for (let i = 0; i < 1; i++) {
   bigData.push(d);
 }
 
-class Demo extends Component<any, any> {
+interface DemoProps {
+  searchText?: string;
+  noRemote?: boolean;
+}
+
+class Demo extends Component<DemoProps, any> {
   inputBProps: any;
   tableRef: any = React.createRef();
   colRenderCount = 0;
@@ -191,6 +196,7 @@ class Demo extends Component<any, any> {
                   options={{
                     selection: true,
                   }}
+                  searchText={this.props.searchText || ''}
                 />
               </Grid>
             </Grid>
@@ -201,46 +207,48 @@ class Demo extends Component<any, any> {
             >
               Select
             </button>
-            <AdvancedMaterialTable
-              title="Remote Data Preview"
-              columns={[
-                {
-                  title: 'Avatar',
-                  field: 'avatar',
-                  render: rowData => (
-                    <img
-                      style={{ height: 36, borderRadius: '50%' }}
-                      src={rowData.avatar}
-                      alt="Derp"
-                    />
-                  ),
-                },
-                { title: 'Id', field: 'id' },
-                { title: 'First Name', field: 'first_name' },
-                { title: 'Last Name', field: 'last_name' },
-              ]}
-              options={{
-                grouping: true,
-                filtering: true,
-              }}
-              data={query =>
-                new Promise(resolve => {
-                  let url = 'https://reqres.in/api/users?';
-                  url += 'per_page=' + query.pageSize;
-                  url += '&page=' + (query.page + 1);
-                  console.log(query);
-                  fetch(url)
-                    .then(response => response.json())
-                    .then(result => {
-                      resolve({
-                        data: result.data,
-                        page: result.page - 1,
-                        totalCount: result.total,
+            {!this.props.noRemote && (
+              <AdvancedMaterialTable
+                title="Remote Data Preview"
+                columns={[
+                  {
+                    title: 'Avatar',
+                    field: 'avatar',
+                    render: rowData => (
+                      <img
+                        style={{ height: 36, borderRadius: '50%' }}
+                        src={rowData.avatar}
+                        alt="Derp"
+                      />
+                    ),
+                  },
+                  { title: 'Id', field: 'id' },
+                  { title: 'First Name', field: 'first_name' },
+                  { title: 'Last Name', field: 'last_name' },
+                ]}
+                options={{
+                  grouping: true,
+                  filtering: true,
+                }}
+                data={query =>
+                  new Promise(resolve => {
+                    let url = 'https://reqres.in/api/users?';
+                    url += 'per_page=' + query.pageSize;
+                    url += '&page=' + (query.page + 1);
+                    console.log(query);
+                    fetch(url)
+                      .then(response => response.json())
+                      .then(result => {
+                        resolve({
+                          data: result.data,
+                          page: result.page - 1,
+                          totalCount: result.total,
+                        });
                       });
-                    });
-                })
-              }
-            />
+                  })
+                }
+              />
+            )}
           </div>
         </MuiThemeProvider>
       </>
