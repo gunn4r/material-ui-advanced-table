@@ -205,4 +205,5 @@ export const propTypes = {
   onTreeExpandChange: PropTypes.func,
   tableRef: PropTypes.any,
   style: PropTypes.object,
+  searchText: PropTypes.string,
 };

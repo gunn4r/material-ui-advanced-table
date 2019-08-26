@@ -15,7 +15,7 @@
     "test:watch": "npm run test -- --watchAll",
     "start": "cross-env NODE_ENV=development tsdx watch",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production tsdx build --format=umd,esm,cjs",
+    "build": "cross-env NODE_ENV=production tsdx build --format=esm,cjs",
     "prepublishOnly": "npm run build",
     "size": "size-limit",
     "storybook": "start-storybook -p 6006",

@@ -6,7 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import MaterialTable from 'material-ui-advanced-table';
 
-let direction: 'ltr' | 'rtl' = 'ltr';
+const direction: 'ltr' | 'rtl' = 'ltr';
 
 const theme = createMuiTheme({
   direction: direction,
@@ -43,8 +43,8 @@ class Demo extends Component<any, any> {
     data: [
       {
         id: 1,
-        name: 'A1',
-        surname: 'B',
+        name: 'George',
+        surname: 'Jetson',
         isMarried: true,
         birthDate: new Date(1987, 1, 1),
         birthCity: 0,
@@ -55,9 +55,9 @@ class Demo extends Component<any, any> {
       },
       {
         id: 2,
-        name: 'A2',
-        surname: 'B',
-        isMarried: false,
+        name: 'Jane',
+        surname: 'Jetson',
+        isMarried: true,
         birthDate: new Date(1987, 1, 1),
         birthCity: 34,
         sex: 'Female',
@@ -68,12 +68,12 @@ class Demo extends Component<any, any> {
       },
       {
         id: 3,
-        name: 'A3',
-        surname: 'B',
-        isMarried: true,
+        name: 'Elroy',
+        surname: 'Jetson',
+        isMarried: false,
         birthDate: new Date(1987, 1, 1),
         birthCity: 34,
-        sex: 'Female',
+        sex: 'Male',
         type: 'child',
         insertDateTime: new Date(2018, 1, 1, 12, 23, 44),
         time: new Date(1900, 1, 1, 14, 23, 35),
@@ -81,9 +81,9 @@ class Demo extends Component<any, any> {
       },
       {
         id: 4,
-        name: 'A4',
-        surname: 'C',
-        isMarried: true,
+        name: 'Judy',
+        surname: 'Jetson',
+        isMarried: false,
         birthDate: new Date(1987, 1, 1),
         birthCity: 34,
         sex: 'Female',
@@ -127,7 +127,7 @@ class Demo extends Component<any, any> {
             <input
               value={props.value}
               onChange={e => {
-                var data = { ...props.rowData };
+                const data = { ...props.rowData };
                 data.name = e.target.value;
                 data.surname = e.target.value.toLocaleUpperCase();
                 props.onRowDataChange(data);

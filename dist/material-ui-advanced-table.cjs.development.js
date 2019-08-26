@@ -2505,7 +2505,7 @@ function (_React$Component) {
     var localization = _extends({}, MTableToolbar.defaultProps.localization, this.props.localization);
 
     if (this.props.search) {
-      return React.createElement(core.TextField, {
+      return this.props.components.SearchField ? React.createElement(this.props.components.SearchField, Object.assign({}, this.props)) : React.createElement(core.TextField, {
         className: this.props.searchFieldAlignment === 'left' && this.props.showTitle === false ? null : this.props.classes.searchField,
         value: this.props.searchText,
         onChange: function onChange(event) {
@@ -3282,7 +3282,8 @@ var propTypes = {
   onRowClick: PropTypes.func,
   onTreeExpandChange: PropTypes.func,
   tableRef: PropTypes.any,
-  style: PropTypes.object
+  style: PropTypes.object,
+  searchText: PropTypes.string
 };
 
 var DataManager =
@@ -4499,7 +4500,7 @@ function (_React$Component) {
         orderDirection: renderState.orderDirection,
         page: 0,
         pageSize: calculatedProps.options.pageSize,
-        search: renderState.searchText,
+        search: props.searchText || renderState.searchText,
         totalCount: 0
       },
       showAddRow: false

@@ -33,7 +33,7 @@ export default class MaterialTable extends React.Component<any, any> {
         orderDirection: renderState.orderDirection,
         page: 0,
         pageSize: calculatedProps.options.pageSize,
-        search: renderState.searchText,
+        search: props.searchText || renderState.searchText,
 
         totalCount: 0,
       },

@@ -68,7 +68,9 @@ export class MTableToolbar extends React.Component<any, any> {
       ...this.props.localization,
     };
     if (this.props.search) {
-      return (
+      return this.props.components.SearchField ? (
+        <this.props.components.SearchField {...this.props} />
+      ) : (
         <TextField
           className={
             this.props.searchFieldAlignment === 'left' && this.props.showTitle === false

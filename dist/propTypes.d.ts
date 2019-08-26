@@ -266,4 +266,5 @@ export declare const propTypes: {
     onTreeExpandChange: PropTypes.Requireable<(...args: any[]) => any>;
     tableRef: PropTypes.Requireable<any>;
     style: PropTypes.Requireable<object>;
+    searchText: PropTypes.Requireable<string>;
 };
