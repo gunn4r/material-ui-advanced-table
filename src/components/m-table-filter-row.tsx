@@ -34,7 +34,7 @@ const MenuProps = {
   },
 };
 
-class MTableFilterRow extends React.Component<any, any> {
+export class MTableFilterRow extends React.Component<any, any> {
   renderLookupFilter = columnDef => (
     <FormControl style={{ width: '100%' }}>
       <InputLabel htmlFor="select-multiple-checkbox">
@@ -248,5 +248,3 @@ class MTableFilterRow extends React.Component<any, any> {
   hasActions: PropTypes.bool,
   localization: PropTypes.object,
 };
-
-export default MTableFilterRow;

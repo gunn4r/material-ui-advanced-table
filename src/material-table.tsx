@@ -6,7 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import DataManager from './utils/data-manager';
 import { debounce } from 'debounce';
 
-export default class MaterialTable extends React.Component<any, any> {
+export class MaterialTable extends React.Component<any, any> {
   dataManager = new DataManager();
 
   constructor(props) {

@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { Draggable } from 'react-beautiful-dnd';
 
-export class MTableHeader extends React.Component<any, any> {
+export class MTableHeaderInner extends React.Component<any, any> {
   renderHeader() {
     const mapArr = this.props.columns
       .filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
@@ -197,6 +197,18 @@ export class MTableHeader extends React.Component<any, any> {
   }
 }
 
+export const styles = theme =>
+  createStyles({
+    header: {
+      position: 'sticky',
+      top: 0,
+      zIndex: 10,
+      backgroundColor: theme.palette.background.paper, // Change according to theme,
+    },
+  });
+
+export const MTableHeader = withStyles(styles)(MTableHeaderInner);
+
 (MTableHeader as any).defaultProps = {
   dataCount: 0,
   hasSelection: false,
@@ -232,15 +244,3 @@ export class MTableHeader extends React.Component<any, any> {
   showSelectAllCheckbox: PropTypes.bool,
   draggable: PropTypes.bool,
 };
-
-export const styles = theme =>
-  createStyles({
-    header: {
-      position: 'sticky',
-      top: 0,
-      zIndex: 10,
-      backgroundColor: theme.palette.background.paper, // Change according to theme,
-    },
-  });
-
-export default withStyles(styles)(MTableHeader);

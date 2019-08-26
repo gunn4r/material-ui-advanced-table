@@ -1,6 +1,6 @@
 import React from 'react';
 import DataManager from './utils/data-manager';
-export default class MaterialTable extends React.Component<any, any> {
+export declare class MaterialTable extends React.Component<any, any> {
     dataManager: DataManager;
     constructor(props: any);
     componentDidMount(): void;

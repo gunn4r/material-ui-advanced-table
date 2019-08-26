@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-class MTableGroupbar extends React.Component<any, any> {
+export class MTableGroupbar extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {};
@@ -114,5 +114,3 @@ class MTableGroupbar extends React.Component<any, any> {
     placeholder: PropTypes.string,
   }),
 };
-
-export default MTableGroupbar;

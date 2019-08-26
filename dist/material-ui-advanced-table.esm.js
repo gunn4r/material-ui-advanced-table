@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Icon, Tooltip, TableRow, TableCell, TableBody, Checkbox, Toolbar, Typography, Chip, Select, MenuItem, TextField, FormControl, InputLabel, Input, ListItemText, InputAdornment, withStyles, TableSortLabel, TableHead, createStyles, Button, Hidden, Menu, FormControlLabel, CircularProgress, TablePagination, Paper, Table, TableFooter, LinearProgress } from '@material-ui/core';
+import { IconButton, Icon, Tooltip, TableRow, TableCell, TableBody, Checkbox, Toolbar, Typography, Chip, Select, MenuItem, TextField, FormControl, InputLabel, Input, ListItemText, InputAdornment, TableSortLabel, TableHead, withStyles, createStyles, Button, Hidden, Menu, FormControlLabel, CircularProgress, TablePagination, Paper, Table, TableFooter, LinearProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
 import DateFnsUtils from '@date-io/date-fns';
@@ -107,7 +107,6 @@ function (_React$Component) {
 
   return MTableAction;
 }(React.Component);
-
 MTableAction.defaultProps = {
   action: {},
   data: {}
@@ -154,7 +153,6 @@ function (_React$Component) {
 
   return MTableActions;
 }(React.Component);
-
 MTableActions.defaultProps = {
   actions: [],
   data: {}
@@ -388,7 +386,6 @@ function (_React$Component) {
 
   return MTableBody;
 }(React.Component);
-
 MTableBody.defaultProps = {
   actions: [],
   currentPage: 0,
@@ -944,7 +941,6 @@ function (_React$Component) {
 
   return MTableGroupbar;
 }(React.Component);
-
 MTableGroupbar.defaultProps = {};
 MTableGroupbar.propTypes = {
   localization:
@@ -1750,7 +1746,6 @@ function (_React$Component) {
 
   return MTableEditField;
 }(React.Component);
-
 MTableEditField.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
@@ -1767,7 +1762,6 @@ var MenuProps = {
     }
   }
 };
-
 var MTableFilterRow =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1978,7 +1972,6 @@ function (_React$Component) {
 
   return MTableFilterRow;
 }(React.Component);
-
 MTableFilterRow.defaultProps = {
   emptyCell: false,
   columns: [],
@@ -2001,16 +1994,16 @@ MTableFilterRow.propTypes = {
   localization: PropTypes.object
 };
 
-var MTableHeader =
+var MTableHeaderInner =
 /*#__PURE__*/
 function (_React$Component) {
-  _inheritsLoose(MTableHeader, _React$Component);
+  _inheritsLoose(MTableHeaderInner, _React$Component);
 
-  function MTableHeader() {
+  function MTableHeaderInner() {
     return _React$Component.apply(this, arguments) || this;
   }
 
-  var _proto = MTableHeader.prototype;
+  var _proto = MTableHeaderInner.prototype;
 
   _proto.renderHeader = function renderHeader() {
     var _this = this;
@@ -2150,8 +2143,21 @@ function (_React$Component) {
     return React.createElement(TableHead, null, React.createElement(TableRow, null, headers));
   };
 
-  return MTableHeader;
+  return MTableHeaderInner;
 }(React.Component);
+var styles = function styles(theme) {
+  return createStyles({
+    header: {
+      position: 'sticky',
+      top: 0,
+      zIndex: 10,
+      backgroundColor: theme.palette.background.paper
+    }
+  });
+};
+var MTableHeader =
+/*#__PURE__*/
+withStyles(styles)(MTableHeaderInner);
 MTableHeader.defaultProps = {
   dataCount: 0,
   hasSelection: false,
@@ -2186,18 +2192,6 @@ MTableHeader.propTypes = {
   showSelectAllCheckbox: PropTypes.bool,
   draggable: PropTypes.bool
 };
-var styles = function styles(theme) {
-  return createStyles({
-    header: {
-      position: 'sticky',
-      top: 0,
-      zIndex: 10,
-      backgroundColor: theme.palette.background.paper
-    }
-  });
-};
-var mTableHeader = /*#__PURE__*/
-withStyles(styles)(MTableHeader);
 
 var MTablePaginationInner =
 /*#__PURE__*/
@@ -2318,12 +2312,12 @@ withStyles(actionsStyles, {
   withTheme: true
 })(MTablePaginationInner);
 
-var MTablePaginationInner$1 =
+var MTableSteppedPaginationInner =
 /*#__PURE__*/
 function (_React$Component) {
-  _inheritsLoose(MTablePaginationInner, _React$Component);
+  _inheritsLoose(MTableSteppedPaginationInner, _React$Component);
 
-  function MTablePaginationInner() {
+  function MTableSteppedPaginationInner() {
     var _this;
 
     _this = _React$Component.apply(this, arguments) || this;
@@ -2353,7 +2347,7 @@ function (_React$Component) {
     return _this;
   }
 
-  var _proto = MTablePaginationInner.prototype;
+  var _proto = MTableSteppedPaginationInner.prototype;
 
   _proto.renderPagesButton = function renderPagesButton(start, end) {
     var buttons = [];
@@ -2386,7 +2380,7 @@ function (_React$Component) {
         page = _this$props.page,
         rowsPerPage = _this$props.rowsPerPage;
 
-    var localization = _extends({}, MTablePaginationInner.defaultProps.localization, this.props.localization);
+    var localization = _extends({}, MTableSteppedPaginationInner.defaultProps.localization, this.props.localization);
 
     var maxPages = Math.ceil(count / rowsPerPage) - 1;
     var pageStart = Math.max(page - 1, 0);
@@ -2410,7 +2404,7 @@ function (_React$Component) {
     }, React.createElement(this.props.icons.NextPage, null)))));
   };
 
-  return MTablePaginationInner;
+  return MTableSteppedPaginationInner;
 }(React.Component);
 
 var actionsStyles$1 = function actionsStyles(theme) {
@@ -2423,7 +2417,7 @@ var actionsStyles$1 = function actionsStyles(theme) {
   };
 };
 
-MTablePaginationInner$1.propTypes = {
+MTableSteppedPaginationInner.propTypes = {
   onChangePage: PropTypes.func,
   page: PropTypes.number,
   count: PropTypes.number,
@@ -2431,7 +2425,7 @@ MTablePaginationInner$1.propTypes = {
   classes: PropTypes.object,
   localization: PropTypes.object
 };
-MTablePaginationInner$1.defaultProps = {
+MTableSteppedPaginationInner.defaultProps = {
   localization: {
     previousTooltip: 'Previous Page',
     nextTooltip: 'Next Page',
@@ -2439,18 +2433,18 @@ MTablePaginationInner$1.defaultProps = {
     labelRowsPerPage: 'Rows per page:'
   }
 };
-var MTablePagination$1 =
+var MTableSteppedPagination =
 /*#__PURE__*/
 withStyles(actionsStyles$1, {
   withTheme: true
-})(MTablePaginationInner$1);
+})(MTableSteppedPaginationInner);
 
-var MTableToolbar =
+var MTableToolbarInner =
 /*#__PURE__*/
 function (_React$Component) {
-  _inheritsLoose(MTableToolbar, _React$Component);
+  _inheritsLoose(MTableToolbarInner, _React$Component);
 
-  function MTableToolbar(props) {
+  function MTableToolbarInner(props) {
     var _this;
 
     _this = _React$Component.call(this, props) || this;
@@ -2493,12 +2487,12 @@ function (_React$Component) {
     return _this;
   }
 
-  var _proto = MTableToolbar.prototype;
+  var _proto = MTableToolbarInner.prototype;
 
   _proto.renderSearch = function renderSearch() {
     var _this2 = this;
 
-    var localization = _extends({}, MTableToolbar.defaultProps.localization, this.props.localization);
+    var localization = _extends({}, MTableToolbarInner.defaultProps.localization, this.props.localization);
 
     if (this.props.search) {
       return this.props.components.SearchField ? React.createElement(this.props.components.SearchField, Object.assign({}, this.props)) : React.createElement(TextField, {
@@ -2540,7 +2534,7 @@ function (_React$Component) {
   _proto.renderDefaultActions = function renderDefaultActions() {
     var _this3 = this;
 
-    var localization = _extends({}, MTableToolbar.defaultProps.localization, this.props.localization);
+    var localization = _extends({}, MTableToolbarInner.defaultProps.localization, this.props.localization);
 
     return React.createElement("div", null, this.props.columnsButton && React.createElement("span", null, React.createElement(Tooltip, {
       title: localization.showColumnsTitle
@@ -2632,7 +2626,7 @@ function (_React$Component) {
 
     var classes = this.props.classes;
 
-    var localization = _extends({}, MTableToolbar.defaultProps.localization, this.props.localization);
+    var localization = _extends({}, MTableToolbarInner.defaultProps.localization, this.props.localization);
 
     var title = this.props.showTextRowsSelected && this.props.selectedRows && this.props.selectedRows.length > 0 ? localization.nRowsSelected.replace('{0}', this.props.selectedRows.length) : this.props.showTitle ? this.props.title : null;
     return React.createElement(Toolbar, {
@@ -2646,9 +2640,10 @@ function (_React$Component) {
     }), this.props.searchFieldAlignment === 'right' && this.renderSearch(), this.props.toolbarButtonAlignment === 'right' && this.renderActions());
   };
 
-  return MTableToolbar;
+  return MTableToolbarInner;
 }(React.Component);
-MTableToolbar.defaultProps = {
+
+MTableToolbarInner.defaultProps = {
   actions: [],
   columns: [],
   columnsButton: false,
@@ -2672,7 +2667,7 @@ MTableToolbar.defaultProps = {
   selectedRows: [],
   title: 'No Title!'
 };
-MTableToolbar.propTypes = {
+MTableToolbarInner.propTypes = {
   actions: PropTypes.array,
   columns: PropTypes.array,
   columnsButton: PropTypes.bool,
@@ -2727,8 +2722,9 @@ var styles$1 = function styles(theme) {
     }
   };
 };
-var mTableToolbar = /*#__PURE__*/
-withStyles(styles$1)(MTableToolbar);
+var MTableToolbar =
+/*#__PURE__*/
+withStyles(styles$1)(MTableToolbarInner);
 
 var OverlayLoading = function OverlayLoading(props) {
   return React.createElement("div", {
@@ -2774,11 +2770,11 @@ var defaultProps = {
     FilterRow: MTableFilterRow,
     Groupbar: MTableGroupbar,
     GroupRow: MTableGroupRow,
-    Header: mTableHeader,
+    Header: MTableHeader,
     OverlayLoading: OverlayLoading,
     Pagination: TablePagination,
     Row: MTableBodyRow,
-    Toolbar: mTableToolbar
+    Toolbar: MTableToolbar
   },
   data: [],
   icons: {
@@ -4671,7 +4667,7 @@ function (_React$Component) {
             icons: props.icons,
             localization: localization,
             showFirstLastPageButtons: props.options.showFirstLastPageButtons
-          })) : React.createElement(MTablePagination$1, Object.assign({}, subProps, {
+          })) : React.createElement(MTableSteppedPagination, Object.assign({}, subProps, {
             icons: props.icons,
             localization: localization
           }));
@@ -4860,7 +4856,8 @@ var styles$2 = function styles() {
   };
 };
 
-var index = /*#__PURE__*/
+var AdvancedMaterialTable =
+/*#__PURE__*/
 withStyles(styles$2, {
   withTheme: true
 })(function (props) {
@@ -4869,6 +4866,5 @@ withStyles(styles$2, {
   }));
 });
 
-export default index;
-export { MTableAction, MTableActions, MTableBody, MTableBodyRow, MTableCell, MTableEditField, MTableEditRow, MTableFilterRow, MTableGroupRow, MTableGroupbar, mTableHeader as MTableHeader, MTablePagination, MTablePagination$1 as MTableSteppedPagination, mTableToolbar as MTableToolbar };
+export { AdvancedMaterialTable, MTableAction, MTableActions, MTableBody, MTableBodyRow, MTableCell, MTableEditField, MTableEditRow, MTableFilterRow, MTableGroupRow, MTableGroupbar, MTableHeader, MTablePagination, MTableSteppedPagination, MTableToolbar };
 //# sourceMappingURL=material-ui-advanced-table.esm.js.map

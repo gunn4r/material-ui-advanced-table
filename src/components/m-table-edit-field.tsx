@@ -9,7 +9,7 @@ import {
 } from '@material-ui/pickers';
 import PropTypes from 'prop-types';
 
-class MTableEditField extends React.Component<any, any> {
+export class MTableEditField extends React.Component<any, any> {
   getProps() {
     const { columnDef, rowData, onRowDataChange, ...props } = this.props;
     return props;
@@ -157,5 +157,3 @@ class MTableEditField extends React.Component<any, any> {
   onChange: PropTypes.func.isRequired,
   columnDef: PropTypes.object.isRequired,
 };
-
-export default MTableEditField;

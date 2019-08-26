@@ -2,7 +2,7 @@ import { TableCell, TableRow, IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default class MTableGroupRow extends React.Component<any, any> {
+export class MTableGroupRow extends React.Component<any, any> {
   rotateIconStyle = isOpen => ({
     transform: isOpen ? 'rotate(90deg)' : 'none',
   });

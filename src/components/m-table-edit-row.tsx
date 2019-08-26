@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { byString, setByString } from '../utils';
 
-export default class MTableEditRow extends React.Component<any, any> {
+export class MTableEditRow extends React.Component<any, any> {
   constructor(props) {
     super(props);
 

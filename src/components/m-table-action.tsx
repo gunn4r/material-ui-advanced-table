@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, IconButton, Tooltip } from '@material-ui/core';
 
-class MTableAction extends React.Component<any, any> {
+export class MTableAction extends React.Component<any, any> {
   render() {
     let action = this.props.action;
     if (typeof action === 'function') {
@@ -56,5 +56,3 @@ class MTableAction extends React.Component<any, any> {
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
   size: PropTypes.string,
 };
-
-export default MTableAction;

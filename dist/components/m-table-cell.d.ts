@@ -1,5 +1,5 @@
 import React from 'react';
-export default class MTableCell extends React.Component<any, any> {
+export declare class MTableCell extends React.Component<any, any> {
     getRenderValue(): any;
     getEmptyValue(emptyValue: any): any;
     getCurrencyValue(currencySetting: any, value: any): string;

@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default class MTableBodyRow extends React.Component<any, any> {
+export class MTableBodyRow extends React.Component<any, any> {
   renderColumns() {
     const size = this.getElementSize();
     const mapArr = this.props.columns

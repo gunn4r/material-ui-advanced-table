@@ -1,5 +1,5 @@
 import React from 'react';
-export default class MTableEditRow extends React.Component<any, any> {
+export declare class MTableEditRow extends React.Component<any, any> {
     constructor(props: any);
     createRowData(): any;
     renderColumns(): any;

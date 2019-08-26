@@ -2,7 +2,7 @@ import { TableBody, TableCell, TableRow } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class MTableBody extends React.Component<any, any> {
+export class MTableBody extends React.Component<any, any> {
   renderEmpty(emptyRowCount, renderData) {
     const rowHeight = this.props.options.padding === 'default' ? 49 : 36;
     const localization = {
@@ -291,5 +291,3 @@ class MTableBody extends React.Component<any, any> {
   onEditingCanceled: PropTypes.func,
   onEditingApproved: PropTypes.func,
 };
-
-export default MTableBody;

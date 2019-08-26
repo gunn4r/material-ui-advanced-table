@@ -156,8 +156,6 @@ const actionsStyles = theme => ({
   },
 };
 
-const MTablePagination = withStyles(actionsStyles, { withTheme: true })(
+export const MTablePagination = withStyles(actionsStyles, { withTheme: true })(
   MTablePaginationInner
 );
-
-export default MTablePagination;

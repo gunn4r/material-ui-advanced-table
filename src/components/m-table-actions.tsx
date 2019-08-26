@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class MTableActions extends React.Component<any, any> {
+export class MTableActions extends React.Component<any, any> {
   render() {
     if (this.props.actions) {
       return this.props.actions.map((action, index) => (
@@ -29,5 +29,3 @@ class MTableActions extends React.Component<any, any> {
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
   size: PropTypes.string,
 };
-
-export default MTableActions;

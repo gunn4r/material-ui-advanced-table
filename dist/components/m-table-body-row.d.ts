@@ -1,5 +1,5 @@
 import React from 'react';
-export default class MTableBodyRow extends React.Component<any, any> {
+export declare class MTableBodyRow extends React.Component<any, any> {
     renderColumns(): any;
     renderActions(): JSX.Element;
     renderSelectionColumn(): JSX.Element;

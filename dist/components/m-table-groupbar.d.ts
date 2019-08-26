@@ -1,5 +1,5 @@
 import React from 'react';
-declare class MTableGroupbar extends React.Component<any, any> {
+export declare class MTableGroupbar extends React.Component<any, any> {
     constructor(props: any);
     getItemStyle: (isDragging: any, draggableStyle: any) => any;
     getListStyle: (isDraggingOver: any) => {
@@ -13,4 +13,3 @@ declare class MTableGroupbar extends React.Component<any, any> {
     };
     render(): JSX.Element;
 }
-export default MTableGroupbar;

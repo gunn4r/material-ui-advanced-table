@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import MaterialTable from 'material-ui-advanced-table';
+import { AdvancedMaterialTable } from 'material-ui-advanced-table';
 
 const direction: 'ltr' | 'rtl' = 'ltr';
 
@@ -183,7 +183,7 @@ class Demo extends Component<any, any> {
           <div style={{ maxWidth: '100%', direction }}>
             <Grid container>
               <Grid item xs={12}>
-                <MaterialTable
+                <AdvancedMaterialTable
                   tableRef={this.tableRef}
                   columns={this.state.columns}
                   data={this.state.data}
@@ -201,7 +201,7 @@ class Demo extends Component<any, any> {
             >
               Select
             </button>
-            <MaterialTable
+            <AdvancedMaterialTable
               title="Remote Data Preview"
               columns={[
                 {

@@ -17,7 +17,7 @@ import { CsvBuilder } from 'filefy';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export class MTableToolbar extends React.Component<any, any> {
+class MTableToolbarInner extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,7 @@ export class MTableToolbar extends React.Component<any, any> {
 
   renderSearch() {
     const localization = {
-      ...(MTableToolbar as any).defaultProps.localization,
+      ...(MTableToolbarInner as any).defaultProps.localization,
       ...this.props.localization,
     };
     if (this.props.search) {
@@ -110,7 +110,7 @@ export class MTableToolbar extends React.Component<any, any> {
 
   renderDefaultActions() {
     const localization = {
-      ...(MTableToolbar as any).defaultProps.localization,
+      ...(MTableToolbarInner as any).defaultProps.localization,
       ...this.props.localization,
     };
     return (
@@ -220,7 +220,7 @@ export class MTableToolbar extends React.Component<any, any> {
   render() {
     const { classes } = this.props;
     const localization = {
-      ...(MTableToolbar as any).defaultProps.localization,
+      ...(MTableToolbarInner as any).defaultProps.localization,
       ...this.props.localization,
     };
     const title =
@@ -255,7 +255,7 @@ export class MTableToolbar extends React.Component<any, any> {
   }
 }
 
-(MTableToolbar as any).defaultProps = {
+(MTableToolbarInner as any).defaultProps = {
   actions: [],
   columns: [],
   columnsButton: false,
@@ -280,7 +280,7 @@ export class MTableToolbar extends React.Component<any, any> {
   title: 'No Title!',
 };
 
-(MTableToolbar as any).propTypes = {
+(MTableToolbarInner as any).propTypes = {
   actions: PropTypes.array,
   columns: PropTypes.array,
   columnsButton: PropTypes.bool,
@@ -336,4 +336,4 @@ export const styles = theme => ({
   },
 });
 
-export default withStyles(styles)(MTableToolbar);
+export const MTableToolbar = withStyles(styles)(MTableToolbarInner);
