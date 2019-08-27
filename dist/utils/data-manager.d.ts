@@ -1,4 +1,4 @@
-export default class DataManager {
+export declare class DataManager {
     applyFilters: boolean;
     applySearch: boolean;
     currentPage: number;

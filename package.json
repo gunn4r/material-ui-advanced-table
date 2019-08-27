@@ -1,20 +1,21 @@
 {
   "name": "material-ui-advanced-table",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Datatable for React based on https://material-ui.com/api/table/ with additional features",
   "homepage": "https://github.com/gunn4r/material-ui-advanced-table#readme",
   "main": "dist/material-ui-advanced-table.esm.js",
   "module": "dist/material-ui-advanced-table.esm.js",
-  "typings": "dist/index.d.ts",
+  "typings": "types/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "test": "tsdx test --env=jsdom",
     "test:watch": "npm run test -- --watchAll",
     "start": "cross-env NODE_ENV=development tsdx watch",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production tsdx build --format esm --target web",
+    "build": "cross-env NODE_ENV=production tsdx build --format esm --target browser ",
     "prepublishOnly": "npm run build",
     "size": "size-limit",
     "storybook": "start-storybook -p 6006",

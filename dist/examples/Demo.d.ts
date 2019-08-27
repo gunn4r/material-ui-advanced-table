@@ -4,7 +4,7 @@ interface DemoProps {
     searchText?: string;
     noRemote?: boolean;
 }
-declare class Demo extends Component<DemoProps, any> {
+export declare class Demo extends Component<DemoProps, any> {
     inputBProps: any;
     tableRef: any;
     colRenderCount: number;
@@ -104,4 +104,4 @@ declare class Demo extends Component<DemoProps, any> {
     };
     render(): JSX.Element;
 }
-export default Demo;
+export {};

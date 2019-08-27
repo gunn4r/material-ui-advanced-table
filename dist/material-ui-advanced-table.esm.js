@@ -4492,7 +4492,7 @@ function (_React$Component) {
         orderDirection: renderState.orderDirection,
         page: 0,
         pageSize: calculatedProps.options.pageSize,
-        search: props.searchText || renderState.searchText,
+        search: renderState.searchText,
         totalCount: 0
       },
       showAddRow: false
@@ -4504,6 +4504,10 @@ function (_React$Component) {
 
   _proto.componentDidMount = function componentDidMount() {
     var _this2 = this;
+
+    if (this.props.searchText) {
+      this.dataManager.changeSearchText(this.props.searchText);
+    }
 
     this.setState(this.dataManager.getRenderState(), function () {
       if (_this2.isRemoteData()) {
@@ -4530,6 +4534,7 @@ function (_React$Component) {
       this.dataManager.changeApplySearch(false);
       this.dataManager.changeApplyFilters(false);
     } else {
+      this.dataManager.changeSearchText(props.searchText);
       this.dataManager.changeApplySearch(true);
       this.dataManager.changeApplyFilters(true);
       this.dataManager.setData(props.data);

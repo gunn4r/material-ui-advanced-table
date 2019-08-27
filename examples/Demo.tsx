@@ -37,7 +37,7 @@ interface DemoProps {
   noRemote?: boolean;
 }
 
-class Demo extends Component<DemoProps, any> {
+export class Demo extends Component<DemoProps, any> {
   inputBProps: any;
   tableRef: any = React.createRef();
   colRenderCount = 0;
@@ -255,5 +255,3 @@ class Demo extends Component<DemoProps, any> {
     );
   }
 }
-
-export default Demo;

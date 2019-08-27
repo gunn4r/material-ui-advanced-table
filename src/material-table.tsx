@@ -3,7 +3,7 @@ import DoubleScrollbar from 'react-double-scrollbar';
 import React from 'react';
 import { MTablePagination, MTableSteppedPagination } from './components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import DataManager from './utils/data-manager';
+import { DataManager } from './utils/data-manager';
 import { debounce } from 'debounce';
 
 export class MaterialTable extends React.Component<any, any> {

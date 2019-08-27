@@ -1,7 +1,7 @@
 import formatDate from 'date-fns/format';
 import { byString } from './';
 
-export default class DataManager {
+export class DataManager {
   applyFilters = false;
   applySearch = false;
   currentPage = 0;
