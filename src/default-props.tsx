@@ -5,17 +5,32 @@ import PropTypes from 'prop-types';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const OverlayLoading = props => (
-  <div style={{ display: 'table', width: '100%', height: '100%', backgroundColor: fade(props.theme.palette.background.paper, 0.7) }}>
-    <div style={{ display: 'table-cell', width: '100%', height: '100%', verticalAlign: 'middle', textAlign: 'center' }}>
+  <div
+    style={{
+      display: 'table',
+      width: '100%',
+      height: '100%',
+      backgroundColor: fade(props.theme.palette.background.paper, 0.7),
+    }}
+  >
+    <div
+      style={{
+        display: 'table-cell',
+        width: '100%',
+        height: '100%',
+        verticalAlign: 'middle',
+        textAlign: 'center',
+      }}
+    >
       <CircularProgress />
     </div>
   </div>
 );
 OverlayLoading.propTypes = {
-  theme: PropTypes.any
+  theme: PropTypes.any,
 };
 
-const Container = (props) => <Paper elevation={2} {...props}/>;
+const Container = props => <Paper elevation={2} {...props} />;
 
 export const defaultProps = {
   actions: [],
@@ -36,27 +51,95 @@ export const defaultProps = {
     OverlayLoading: OverlayLoading,
     Pagination: TablePagination,
     Row: MComponents.MTableBodyRow,
-    Toolbar: MComponents.MTableToolbar
+    Toolbar: MComponents.MTableToolbar,
   },
   data: [],
   icons: {
-    Add: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>add_box</Icon>),
-    Check: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>check</Icon>),
-    Clear: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>clear</Icon>),
-    Delete: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>delete_outline</Icon>),
-    DetailPanel: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>chevron_right</Icon>),
-    Edit: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>edit</Icon>),
-    Export: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>save_alt</Icon>),
-    Filter: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>filter_list</Icon>),
-    FirstPage: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>first_page</Icon>),
-    LastPage: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>last_page</Icon>),
-    NextPage: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>chevron_right</Icon>),
-    PreviousPage: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>chevron_left</Icon>),
-    ResetSearch: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>clear</Icon>),
-    Search: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>search</Icon>),
-    SortArrow: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>arrow_upward</Icon>),
-    ThirdStateCheck: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>remove</Icon>),
-    ViewColumn: React.forwardRef((props, ref) => <Icon {...props} ref={ref}>view_column</Icon>)
+    Add: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        add_box
+      </Icon>
+    )),
+    Check: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        check
+      </Icon>
+    )),
+    Clear: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        clear
+      </Icon>
+    )),
+    Delete: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        delete_outline
+      </Icon>
+    )),
+    DetailPanel: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        chevron_right
+      </Icon>
+    )),
+    Edit: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        edit
+      </Icon>
+    )),
+    Export: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        save_alt
+      </Icon>
+    )),
+    Filter: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        filter_list
+      </Icon>
+    )),
+    FirstPage: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        first_page
+      </Icon>
+    )),
+    LastPage: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        last_page
+      </Icon>
+    )),
+    NextPage: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        chevron_right
+      </Icon>
+    )),
+    PreviousPage: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        chevron_left
+      </Icon>
+    )),
+    ResetSearch: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        clear
+      </Icon>
+    )),
+    Search: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        search
+      </Icon>
+    )),
+    SortArrow: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        arrow_upward
+      </Icon>
+    )),
+    ThirdStateCheck: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        remove
+      </Icon>
+    )),
+    ViewColumn: React.forwardRef((props, ref) => (
+      <Icon {...props} ref={ref}>
+        view_column
+      </Icon>
+    )),
   },
   isLoading: false,
   title: 'Table Title',
@@ -92,7 +175,8 @@ export const defaultProps = {
     sorting: true,
     toolbar: true,
     defaultExpanded: false,
-    detailPanelColumnAlignment: 'left'
+    detailPanelColumnAlignment: 'left',
+    flexTable: false,
   },
   localization: {
     grouping: {
@@ -102,7 +186,7 @@ export const defaultProps = {
     pagination: {
       labelDisplayedRows: '{from}-{to} of {count}',
       labelRowsPerPage: 'Rows per page:',
-      labelRowsSelect: 'rows'
+      labelRowsSelect: 'rows',
     },
     toolbar: {},
     header: {},
@@ -115,9 +199,9 @@ export const defaultProps = {
       },
       addTooltip: 'Add',
       deleteTooltip: 'Delete',
-      editTooltip: 'Edit'
-    }
+      editTooltip: 'Edit',
+    },
   },
-  style: {
-  }
+  style: {},
+  preFooterRow: null,
 };
