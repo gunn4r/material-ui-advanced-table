@@ -6,9 +6,10 @@
   "main": "dist/index.js",
   "umd:main": "dist/mylib.umd.production.js",
   "module": "dist/mylib.esm.production.js",
-  "typings": "dist/index.d.ts",
+  "typings": "types/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "test": "tsdx test --env=jsdom",
