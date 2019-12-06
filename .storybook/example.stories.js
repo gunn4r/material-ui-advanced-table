@@ -9,16 +9,16 @@ import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 
 import Demo from '../examples/Demo.tsx';
+import FlexScrollDemo from '../examples/FlexScrollDemo.tsx';
 
 const DemoCode = require('!raw-loader!../examples/Demo.tsx').default;
+const FlexScrollDemoCode = require('!raw-loader!../examples/FlexScrollDemo.tsx').default;
 
 const Code = props => (
   <React.Fragment>
     <Divider style={{ marginTop: '18px' }} />
     <Box mt={2} p={2} boxShadow={2} bgcolor="background.paper">
-      <Typography variant="subtitle2">
-        EXAMPLE CODE
-      </Typography>
+      <Typography variant="subtitle2">EXAMPLE CODE</Typography>
       <Box
         component="pre"
         p={1}
@@ -35,7 +35,7 @@ const Code = props => (
 const MUIWrapper = storyFn => (
   <React.Fragment>
     <CssBaseline />
-    <Container maxWidth="xl" style={{ padding: '18px 0'}}>
+    <Container maxWidth="xl" style={{ padding: '18px 0' }}>
       {storyFn()}
     </Container>
   </React.Fragment>
@@ -50,6 +50,19 @@ storiesOf('Example', module)
           <Demo />
         </main>
         <Code>{DemoCode}</Code>
+      </React.Fragment>
+    );
+  });
+
+storiesOf('Example', module)
+  .addDecorator(MUIWrapper)
+  .add('Flex-Scroll Table', () => {
+    return (
+      <React.Fragment>
+        <main>
+          <FlexScrollDemo />
+        </main>
+        <Code>{FlexScrollDemoCode}</Code>
       </React.Fragment>
     );
   });
