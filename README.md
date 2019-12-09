@@ -148,13 +148,13 @@ Here is a basic example of using material-ui-advanced-table within a react appli
 ```jsx
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import MaterialTable from "material-ui-advanced-table";
+import AdvancedMaterialTable from "material-ui-advanced-table";
 
 class App extends Component {
   render() {
     return (
       <div style={{ maxWidth: "100%" }}>
-        <MaterialTable
+        <AdvancedMaterialTable
           columns={[
             { title: "First Name", field: "firstName" },
             { title: "Last Name", field: "lastName" },

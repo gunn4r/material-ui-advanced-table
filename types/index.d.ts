@@ -2,7 +2,7 @@ import React from 'react';
 import { IconProps } from '@material-ui/core/Icon';
 import { string } from 'prop-types';
 
-export interface MaterialTableProps<RowData extends object> {
+export interface AdvancedMaterialTableProps<RowData extends object> {
   actions?: (Action<RowData> | ((rowData: RowData) => Action<RowData>))[];
   columns: Column<RowData>[];
   components?: Components;
@@ -294,6 +294,6 @@ export interface Localization {
   };
 }
 
-export default class MaterialTable<RowData extends object> extends React.Component<
-  MaterialTableProps<RowData>
-> {}
+export default class AdvancedMaterialTable<
+  RowData extends object
+> extends React.Component<AdvancedMaterialTableProps<RowData>> {}
