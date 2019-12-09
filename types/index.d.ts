@@ -38,6 +38,7 @@ export interface AdvancedMaterialTableProps<RowData extends object> {
   onSearchChange?: (searchText: string) => void;
   onSelectionChange?: (data: RowData[], rowData?: RowData) => void;
   onTreeExpandChange?: (data: any, isExpanded: boolean) => void;
+  searchText?: string;
   style?: React.CSSProperties;
   tableRef?: any;
 }

@@ -207,4 +207,5 @@ export const defaultProps = {
   },
   style: {},
   preFooterRow: null,
+  searchText: '',
 };
