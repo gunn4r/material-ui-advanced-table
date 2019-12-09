@@ -2,10 +2,9 @@ import { TableCell, TableRow, IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default class MTableGroupRow extends React.Component<any, any> {
-
+export class MTableGroupRow extends React.Component<any, any> {
   rotateIconStyle = isOpen => ({
-    transform: isOpen ? 'rotate(90deg)' : 'none'
+    transform: isOpen ? 'rotate(90deg)' : 'none',
   });
 
   render() {
@@ -17,7 +16,8 @@ export default class MTableGroupRow extends React.Component<any, any> {
 
     let detail;
     if (this.props.groupData.isExpanded) {
-      if (this.props.groups.length > (this.props.level + 1)) { // Is there another group
+      if (this.props.groups.length > this.props.level + 1) {
+        // Is there another group
         detail = this.props.groupData.groups.map((groupData, index) => (
           <this.props.components.GroupRow
             actions={this.props.actions}
@@ -43,41 +43,68 @@ export default class MTableGroupRow extends React.Component<any, any> {
             isTreeData={this.props.isTreeData}
           />
         ));
-      }
-      else {
-        detail = this.props.groupData.data.map((rowData, index) => (
-          <this.props.components.Row
-            actions={this.props.actions}
-            key={index}
-            columns={this.props.columns}
-            components={this.props.components}
-            data={rowData}
-            detailPanel={this.props.detailPanel}
-            getFieldValue={this.props.getFieldValue}
-            icons={this.props.icons}
-            path={[...this.props.path, index]}
-            onRowSelected={this.props.onRowSelected}
-            onRowClick={this.props.onRowClick}
-            onToggleDetailPanel={this.props.onToggleDetailPanel}
-            options={this.props.options}
-            isTreeData={this.props.isTreeData}
-            onTreeExpandChanged={this.props.onTreeExpandChanged}
-            onEditingCanceled={this.props.onEditingCanceled}
-            onEditingApproved={this.props.onEditingApproved}
-            hasAnyEditingRow={this.props.hasAnyEditingRow}
-          />
-        ));
+      } else {
+        detail = this.props.groupData.data.map((rowData, index) => {
+          if (rowData.tableData.editing) {
+            return (
+              <this.props.components.EditRow
+                columns={this.props.columns}
+                components={this.props.components}
+                data={rowData}
+                icons={this.props.icons}
+                path={[...this.props.path, index]}
+                localization={this.props.localization}
+                key={index}
+                mode={rowData.tableData.editing}
+                options={this.props.options}
+                isTreeData={this.props.isTreeData}
+                detailPanel={this.props.detailPanel}
+                onEditingCanceled={this.props.onEditingCanceled}
+                onEditingApproved={this.props.onEditingApproved}
+                getFieldValue={this.props.getFieldValue}
+              />
+            );
+          } else {
+            return (
+              <this.props.components.Row
+                actions={this.props.actions}
+                key={index}
+                columns={this.props.columns}
+                components={this.props.components}
+                data={rowData}
+                detailPanel={this.props.detailPanel}
+                getFieldValue={this.props.getFieldValue}
+                icons={this.props.icons}
+                path={[...this.props.path, index]}
+                onRowSelected={this.props.onRowSelected}
+                onRowClick={this.props.onRowClick}
+                onToggleDetailPanel={this.props.onToggleDetailPanel}
+                options={this.props.options}
+                isTreeData={this.props.isTreeData}
+                onTreeExpandChanged={this.props.onTreeExpandChanged}
+                onEditingCanceled={this.props.onEditingCanceled}
+                onEditingApproved={this.props.onEditingApproved}
+                hasAnyEditingRow={this.props.hasAnyEditingRow}
+              />
+            );
+          }
+        });
       }
     }
 
     const freeCells: any[] = [];
     for (let i = 0; i < this.props.level; i++) {
-      freeCells.push(<TableCell padding="checkbox" />);
+      freeCells.push(<TableCell padding="checkbox" key={i} />);
     }
 
     let value = this.props.groupData.value;
     if (column.lookup) {
       value = column.lookup[value];
+    }
+
+    let title = column.title;
+    if (typeof title !== 'string') {
+      title = React.cloneElement(title);
     }
 
     return (
@@ -92,14 +119,17 @@ export default class MTableGroupRow extends React.Component<any, any> {
             icons={this.props.icons}
           >
             <IconButton
-              style={{ transition: 'all ease 200ms', ...this.rotateIconStyle(this.props.groupData.isExpanded) }}
-              onClick={(event) => {
+              style={{
+                transition: 'all ease 200ms',
+                ...this.rotateIconStyle(this.props.groupData.isExpanded),
+              }}
+              onClick={event => {
                 this.props.onGroupExpandChanged(this.props.path);
               }}
             >
               <this.props.icons.DetailPanel />
             </IconButton>
-            <b>{column.title + ": "}</b>
+            <b>{title + ': '}</b>
           </this.props.components.Cell>
         </TableRow>
         {detail}
@@ -112,7 +142,7 @@ export default class MTableGroupRow extends React.Component<any, any> {
   columns: [],
   groups: [],
   options: {},
-  level: 0
+  level: 0,
 };
 
 (MTableGroupRow as any).propTypes = {
@@ -127,6 +157,7 @@ export default class MTableGroupRow extends React.Component<any, any> {
   icons: PropTypes.object,
   isTreeData: PropTypes.bool.isRequired,
   level: PropTypes.number,
+  localization: PropTypes.object,
   onGroupExpandChanged: PropTypes.func,
   onRowSelected: PropTypes.func,
   onRowClick: PropTypes.func,

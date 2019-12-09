@@ -3,49 +3,67 @@ import PropTypes from 'prop-types';
 const RefComponent = PropTypes.shape({ current: PropTypes.element });
 const StyledComponent = PropTypes.shape({
   classes: PropTypes.object,
-  innerRef: RefComponent
+  innerRef: RefComponent,
 });
 
 export const propTypes = {
-  actions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.shape({
-    icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]).isRequired,
-    isFreeAction: PropTypes.bool,
-    tooltip: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-    iconProps: PropTypes.object,
-    disabled: PropTypes.bool,
-    hidden: PropTypes.bool,
-  })])),
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    cellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    currencySetting: PropTypes.shape({
-      locale: PropTypes.string,
-      currencyCode: PropTypes.string,
-      minimumFractionDigits: PropTypes.number,
-      maximumFractionDigits: PropTypes.number
-    }),
-    customFilterAndSearch: PropTypes.func,
-    customSort: PropTypes.func,
-    defaultFilter: PropTypes.any,
-    defaultSort: PropTypes.oneOf(['asc', 'desc']),
-    editComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    emptyValue: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func]),
-    export: PropTypes.bool,
-    field: PropTypes.string,
-    filtering: PropTypes.bool,
-    filterCellStyle: PropTypes.object,
-    grouping: PropTypes.bool,
-    headerStyle: PropTypes.object,
-    hidden: PropTypes.bool,
-    lookup: PropTypes.object,
-    editable: PropTypes.oneOf(['always', 'onUpdate', 'onAdd', 'never']),
-    removable: PropTypes.bool,
-    render: PropTypes.func,
-    searchable: PropTypes.bool,
-    sorting: PropTypes.bool,
-    title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-    type: PropTypes.oneOf(['string', 'boolean', 'numeric', 'date', 'datetime', 'time', 'currency'])
-  })).isRequired,
+  actions: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string])
+          .isRequired,
+        isFreeAction: PropTypes.bool,
+        tooltip: PropTypes.string,
+        onClick: PropTypes.func.isRequired,
+        iconProps: PropTypes.object,
+        disabled: PropTypes.bool,
+        hidden: PropTypes.bool,
+      }),
+    ])
+  ),
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      cellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+      currencySetting: PropTypes.shape({
+        locale: PropTypes.string,
+        currencyCode: PropTypes.string,
+        minimumFractionDigits: PropTypes.number,
+        maximumFractionDigits: PropTypes.number,
+      }),
+      customFilterAndSearch: PropTypes.func,
+      customSort: PropTypes.func,
+      defaultFilter: PropTypes.any,
+      defaultSort: PropTypes.oneOf(['asc', 'desc']),
+      editComponent: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+      emptyValue: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func]),
+      export: PropTypes.bool,
+      field: PropTypes.string,
+      filtering: PropTypes.bool,
+      filterCellStyle: PropTypes.object,
+      filterPlaceholder: PropTypes.string,
+      grouping: PropTypes.bool,
+      headerStyle: PropTypes.object,
+      hidden: PropTypes.bool,
+      initialEditValue: PropTypes.any,
+      lookup: PropTypes.object,
+      editable: PropTypes.oneOf(['always', 'onUpdate', 'onAdd', 'never', PropTypes.func]),
+      removable: PropTypes.bool,
+      render: PropTypes.func,
+      searchable: PropTypes.bool,
+      sorting: PropTypes.bool,
+      title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+      type: PropTypes.oneOf([
+        'string',
+        'boolean',
+        'numeric',
+        'date',
+        'datetime',
+        'time',
+        'currency',
+      ]),
+    })
+  ).isRequired,
   components: PropTypes.shape({
     Action: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
     Actions: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
@@ -58,29 +76,44 @@ export const propTypes = {
     Groupbar: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
     GroupRow: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
     Header: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
-    OverlayLoading: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
+    OverlayLoading: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      StyledComponent,
+    ]),
     Pagination: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
     Row: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
-    Toolbar: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent])
+    Toolbar: PropTypes.oneOfType([PropTypes.element, PropTypes.func, StyledComponent]),
   }),
-  data: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.func]).isRequired,
+  data: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object), PropTypes.func])
+    .isRequired,
   editable: PropTypes.shape({
     onRowAdd: PropTypes.func,
     onRowUpdate: PropTypes.func,
-    onRowDelete: PropTypes.func
+    onRowDelete: PropTypes.func,
   }),
   detailPanel: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({
-        disabled: PropTypes.bool,
-        icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
-        openIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
-        tooltip: PropTypes.string,
-        render: PropTypes.func.isRequired
-      })
-    ]))
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.shape({
+          disabled: PropTypes.bool,
+          icon: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.func,
+            PropTypes.string,
+          ]),
+          openIcon: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.func,
+            PropTypes.string,
+          ]),
+          tooltip: PropTypes.string,
+          render: PropTypes.func.isRequired,
+        }),
+      ])
+    ),
   ]),
   icons: PropTypes.shape({
     Add: PropTypes.oneOfType([PropTypes.element, PropTypes.func, RefComponent]),
@@ -98,7 +131,11 @@ export const propTypes = {
     ResetSearch: PropTypes.oneOfType([PropTypes.element, PropTypes.func, RefComponent]),
     Search: PropTypes.oneOfType([PropTypes.element, PropTypes.func, RefComponent]),
     SortArrow: PropTypes.oneOfType([PropTypes.element, PropTypes.func, RefComponent]),
-    ThirdStateCheck: PropTypes.oneOfType([PropTypes.element, PropTypes.func, RefComponent]),
+    ThirdStateCheck: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+      RefComponent,
+    ]),
     ViewColumn: PropTypes.oneOfType([PropTypes.element, PropTypes.func, RefComponent]),
   }),
   isLoading: PropTypes.bool,
@@ -125,6 +162,7 @@ export const propTypes = {
     initialPage: PropTypes.number,
     maxBodyHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     loadingType: PropTypes.oneOf(['overlay', 'linear']),
+    padding: PropTypes.oneOf(['default', 'dense']),
     paging: PropTypes.bool,
     pageSize: PropTypes.number,
     pageSizeOptions: PropTypes.arrayOf(PropTypes.number),
@@ -137,7 +175,7 @@ export const propTypes = {
     selection: PropTypes.bool,
     selectionProps: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     showEmptyDataSourceMessage: PropTypes.bool,
-    showFirstLastPageButtons: PropTypes.bool, 
+    showFirstLastPageButtons: PropTypes.bool,
     showSelectAllCheckbox: PropTypes.bool,
     showTitle: PropTypes.bool,
     showTextRowsSelected: PropTypes.bool,
@@ -147,20 +185,25 @@ export const propTypes = {
   localization: PropTypes.shape({
     grouping: PropTypes.shape({
       groupedBy: PropTypes.string,
-      placeholder: PropTypes.string
+      placeholder: PropTypes.string,
     }),
     pagination: PropTypes.object,
     toolbar: PropTypes.object,
     header: PropTypes.object,
-    body: PropTypes.object
+    body: PropTypes.object,
   }),
   initialFormData: PropTypes.object,
+  onSearchChange: PropTypes.func,
+  onColumnDragged: PropTypes.func,
+  onGroupRemoved: PropTypes.func,
   onSelectionChange: PropTypes.func,
   onChangeRowsPerPage: PropTypes.func,
   onChangePage: PropTypes.func,
+  onChangeColumnHidden: PropTypes.func,
   onOrderChange: PropTypes.func,
   onRowClick: PropTypes.func,
   onTreeExpandChange: PropTypes.func,
   tableRef: PropTypes.any,
-  style: PropTypes.object
+  style: PropTypes.object,
+  searchText: PropTypes.string,
 };

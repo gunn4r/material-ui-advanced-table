@@ -1,8 +1,8 @@
-import { Icon, IconButton, withStyles, Tooltip, Hidden, Typography, Button } from '@material-ui/core';
+import { IconButton, withStyles, Tooltip, Hidden, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class MTablePaginationInner extends React.Component<any, any> {
+class MTableSteppedPaginationInner extends React.Component<any, any> {
   handleFirstPageButtonClick = event => {
     this.props.onChangePage(event, 0);
   };
@@ -30,17 +30,21 @@ class MTablePaginationInner extends React.Component<any, any> {
     const buttons: any[] = [];
 
     for (let p = start; p <= end; p++) {
-      const buttonVariant = p === this.props.page ? "contained" : undefined;
+      const buttonVariant = p === this.props.page ? 'contained' : undefined;
       buttons.push(
         <Button
           size="small"
           style={{
             boxShadow: 'none',
-            maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'
+            maxWidth: '30px',
+            maxHeight: '30px',
+            minWidth: '30px',
+            minHeight: '30px',
           }}
           disabled={p === this.props.page}
           variant={buttonVariant}
           onClick={this.handleNumberButtonClick(p)}
+          key={p}
         >
           {p + 1}
         </Button>
@@ -53,7 +57,10 @@ class MTablePaginationInner extends React.Component<any, any> {
   render() {
     const { classes, count, page, rowsPerPage } = this.props;
 
-    const localization = { ...(MTablePaginationInner as any).defaultProps.localization, ...this.props.localization };
+    const localization = {
+      ...(MTableSteppedPaginationInner as any).defaultProps.localization,
+      ...this.props.localization,
+    };
     const maxPages = Math.ceil(count / rowsPerPage) - 1;
 
     const pageStart = Math.max(page - 1, 0);
@@ -72,9 +79,7 @@ class MTablePaginationInner extends React.Component<any, any> {
             </IconButton>
           </span>
         </Tooltip>
-        <Hidden smDown>
-          {this.renderPagesButton(pageStart, pageEnd)}
-        </Hidden>
+        <Hidden smDown>{this.renderPagesButton(pageStart, pageEnd)}</Hidden>
         <Tooltip title={localization.nextTooltip}>
           <span>
             <IconButton
@@ -95,28 +100,28 @@ const actionsStyles = theme => ({
   root: {
     flexShrink: 0,
     color: theme.palette.text.secondary,
-    marginLeft: theme.spacing(2.5)
-  }
+    marginLeft: theme.spacing(2.5),
+  },
 });
 
-(MTablePaginationInner as any).propTypes = {
+(MTableSteppedPaginationInner as any).propTypes = {
   onChangePage: PropTypes.func,
   page: PropTypes.number,
   count: PropTypes.number,
   rowsPerPage: PropTypes.number,
   classes: PropTypes.object,
-  localization: PropTypes.object
+  localization: PropTypes.object,
 };
 
-(MTablePaginationInner as any).defaultProps = {
+(MTableSteppedPaginationInner as any).defaultProps = {
   localization: {
     previousTooltip: 'Previous Page',
     nextTooltip: 'Next Page',
     labelDisplayedRows: '{from}-{to} of {count}',
-    labelRowsPerPage: 'Rows per page:'
-  }
+    labelRowsPerPage: 'Rows per page:',
+  },
 };
 
-const MTablePagination = withStyles(actionsStyles, { withTheme: true })(MTablePaginationInner);
-
-export default MTablePagination;
+export const MTableSteppedPagination = withStyles(actionsStyles, { withTheme: true })(
+  MTableSteppedPaginationInner
+);

@@ -4,11 +4,11 @@ import { Grid } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import MaterialTable from 'material-ui-advanced-table';
+import { AdvancedMaterialTable } from 'material-ui-advanced-table';
 
 import SampleTotalsRow from './SampleTotalsRow';
 
-let direction: 'ltr' | 'rtl' = 'ltr';
+const direction: 'ltr' | 'rtl' = 'ltr';
 
 const theme = createMuiTheme({
   direction: direction,
@@ -129,7 +129,7 @@ class Demo extends Component<any, any> {
             <input
               value={props.value}
               onChange={e => {
-                var data = { ...props.rowData };
+                const data = { ...props.rowData };
                 data.name = e.target.value;
                 data.surname = e.target.value.toLocaleUpperCase();
                 props.onRowDataChange(data);
@@ -186,7 +186,7 @@ class Demo extends Component<any, any> {
           >
             <Grid container>
               <Grid item xs={12}>
-                <MaterialTable
+                <AdvancedMaterialTable
                   tableRef={this.tableRef}
                   columns={this.state.columns}
                   data={this.state.data}
