@@ -52,6 +52,15 @@ storiesOf('Example', module)
         <Code>{DemoCode}</Code>
       </React.Fragment>
     );
+  })
+  .add('Search Text Props', () => {
+    return (
+      <React.Fragment>
+        <main>
+          <Demo searchText="Ge" noRemote />
+        </main>
+      </React.Fragment>
+    );
   });
 
 storiesOf('Example', module)

@@ -6,7 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import DataManager from './utils/data-manager';
 import { debounce } from 'debounce';
 
-export default class MaterialTable extends React.Component<any, any> {
+export class MaterialTable extends React.Component<any, any> {
   dataManager = new DataManager();
 
   constructor(props) {
@@ -42,6 +42,9 @@ export default class MaterialTable extends React.Component<any, any> {
   }
 
   componentDidMount() {
+    if (this.props.searchText) {
+      this.dataManager.changeSearchText(this.props.searchText);
+    }
     this.setState(this.dataManager.getRenderState(), () => {
       if (this.isRemoteData()) {
         this.onQueryChange(this.state.query);
@@ -67,6 +70,7 @@ export default class MaterialTable extends React.Component<any, any> {
       this.dataManager.changeApplySearch(false);
       this.dataManager.changeApplyFilters(false);
     } else {
+      this.dataManager.changeSearchText(props.searchText);
       this.dataManager.changeApplySearch(true);
       this.dataManager.changeApplyFilters(true);
       this.dataManager.setData(props.data);
@@ -87,6 +91,22 @@ export default class MaterialTable extends React.Component<any, any> {
     const props = this.getProps(nextProps);
     this.setDataManagerFields(props);
     this.setState(this.dataManager.getRenderState());
+  }
+
+  componentDidUpdate() {
+    const count = this.isRemoteData()
+      ? this.state.query.totalCount
+      : this.state.data.length;
+    const currentPage = this.isRemoteData()
+      ? this.state.query.page
+      : this.state.currentPage;
+    const pageSize = this.isRemoteData()
+      ? this.state.query.pageSize
+      : this.state.pageSize;
+
+    if (count <= pageSize * currentPage && currentPage !== 0) {
+      this.onChangePage(null, Math.max(0, Math.ceil(count / pageSize) - 1));
+    }
   }
 
   getProps(props?: any) {
@@ -169,7 +189,10 @@ export default class MaterialTable extends React.Component<any, any> {
 
   onChangeColumnHidden = (columnId, hidden) => {
     this.dataManager.changeColumnHidden(columnId, hidden);
-    this.setState(this.dataManager.getRenderState());
+    this.setState(this.dataManager.getRenderState(), () => {
+      this.props.onChangeColumnHidden &&
+        this.props.onChangeColumnHidden(columnId, hidden);
+    });
   };
 
   onChangeGroupOrder = groupedColumn => {
@@ -178,19 +201,20 @@ export default class MaterialTable extends React.Component<any, any> {
   };
 
   onChangeOrder = (orderBy, orderDirection) => {
-    this.dataManager.changeOrder(orderBy, orderDirection);
+    const newOrderBy = orderDirection === '' ? -1 : orderBy;
+    this.dataManager.changeOrder(newOrderBy, orderDirection);
 
     if (this.isRemoteData()) {
       const query = { ...this.state.query };
       query.page = 0;
-      query.orderBy = this.state.columns.find(a => a.tableData.id === orderBy);
+      query.orderBy = this.state.columns.find(a => a.tableData.id === newOrderBy);
       query.orderDirection = orderDirection;
       this.onQueryChange(query, () => {
-        this.props.onOrderChange && this.props.onOrderChange(orderBy, orderDirection);
+        this.props.onOrderChange && this.props.onOrderChange(newOrderBy, orderDirection);
       });
     } else {
       this.setState(this.dataManager.getRenderState(), () => {
-        this.props.onOrderChange && this.props.onOrderChange(orderBy, orderDirection);
+        this.props.onOrderChange && this.props.onOrderChange(newOrderBy, orderDirection);
       });
     }
   };
@@ -232,7 +256,15 @@ export default class MaterialTable extends React.Component<any, any> {
 
   onDragEnd = result => {
     this.dataManager.changeByDrag(result);
-    this.setState(this.dataManager.getRenderState());
+    this.setState(this.dataManager.getRenderState(), () => {
+      if (
+        this.props.onColumnDragged &&
+        result.destination.droppableId === 'headers' &&
+        result.source.droppableId === 'headers'
+      ) {
+        this.props.onColumnDragged(result.source.index, result.destination.index);
+      }
+    });
   };
 
   onGroupExpandChanged = path => {
@@ -251,7 +283,9 @@ export default class MaterialTable extends React.Component<any, any> {
       type: 'DEFAULT',
     };
     this.dataManager.changeByDrag(result);
-    this.setState(this.dataManager.getRenderState());
+    this.setState(this.dataManager.getRenderState(), () => {
+      this.props.onGroupRemoved && this.props.onGroupRemoved(groupedColumn, index);
+    });
   };
 
   onEditingApproved = (mode, newData, oldData) => {
@@ -387,7 +421,9 @@ export default class MaterialTable extends React.Component<any, any> {
 
       this.onQueryChange(query);
     } else {
-      this.setState(this.dataManager.getRenderState());
+      this.setState(this.dataManager.getRenderState(), () => {
+        this.props.onSearchChange && this.props.onSearchChange(this.state.searchText);
+      });
     }
   }, this.props.options.debounceInterval);
 
@@ -399,6 +435,7 @@ export default class MaterialTable extends React.Component<any, any> {
   onFilterChangeDebounce = debounce(() => {
     if (this.isRemoteData()) {
       const query = { ...this.state.query };
+      query.page = 0;
       query.filters = this.state.columns
         .filter(a => a.tableData.filterValue)
         .map(a => ({
@@ -596,6 +633,7 @@ export default class MaterialTable extends React.Component<any, any> {
                           columns={this.state.columns}
                           hasSelection={props.options.selection}
                           headerStyle={props.options.headerStyle}
+                          icons={props.icons}
                           selectedCount={this.state.selectedCount}
                           dataCount={
                             props.parentChildData
@@ -710,7 +748,7 @@ const ScrollBar = ({ double, flexTable, children }) => {
       <div
         style={
           flexTable
-            ? { height: '0px', flex: '2 1 auto', overflow: 'auto' }
+            ? { height: 0, flex: '2 1 auto', overflow: 'auto' }
             : { overflowX: 'auto' }
         }
       >

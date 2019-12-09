@@ -55,6 +55,7 @@ export const defaultProps = {
   },
   data: [],
   icons: {
+    /* eslint-disable react/display-name */
     Add: React.forwardRef((props, ref) => (
       <Icon {...props} ref={ref}>
         add_box
@@ -127,7 +128,7 @@ export const defaultProps = {
     )),
     SortArrow: React.forwardRef((props, ref) => (
       <Icon {...props} ref={ref}>
-        arrow_upward
+        arrow_downward
       </Icon>
     )),
     ThirdStateCheck: React.forwardRef((props, ref) => (
@@ -140,6 +141,7 @@ export const defaultProps = {
         view_column
       </Icon>
     )),
+    /* eslint-enable react/display-name */
   },
   isLoading: false,
   title: 'Table Title',
@@ -157,6 +159,7 @@ export const defaultProps = {
     filtering: false,
     header: true,
     loadingType: 'overlay',
+    padding: 'default',
     paging: true,
     pageSize: 5,
     pageSizeOptions: [5, 10, 20],
@@ -195,7 +198,7 @@ export const defaultProps = {
       editRow: {
         saveTooltip: 'Save',
         cancelTooltip: 'Cancel',
-        deleteText: 'Are you sure delete this row?',
+        deleteText: 'Are you sure you want to delete this row?',
       },
       addTooltip: 'Add',
       deleteTooltip: 'Delete',
