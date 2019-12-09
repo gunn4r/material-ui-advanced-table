@@ -179,6 +179,7 @@ export const defaultProps = {
     toolbar: true,
     defaultExpanded: false,
     detailPanelColumnAlignment: 'left',
+    flexTable: false,
   },
   localization: {
     grouping: {
@@ -205,4 +206,5 @@ export const defaultProps = {
     },
   },
   style: {},
+  preFooterRow: null,
 };

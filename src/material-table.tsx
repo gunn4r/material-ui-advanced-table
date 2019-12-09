@@ -111,18 +111,6 @@ export class MaterialTable extends React.Component<any, any> {
 
   getProps(props?: any) {
     const calculatedProps = { ...(props || this.props) };
-    calculatedProps.components = {
-      ...(MaterialTable as any).defaultProps.components,
-      ...calculatedProps.components,
-    };
-    calculatedProps.icons = {
-      ...(MaterialTable as any).defaultProps.icons,
-      ...calculatedProps.icons,
-    };
-    calculatedProps.options = {
-      ...(MaterialTable as any).defaultProps.options,
-      ...calculatedProps.options,
-    };
 
     const localization = calculatedProps.localization.body;
 
@@ -175,6 +163,19 @@ export class MaterialTable extends React.Component<any, any> {
         }));
       }
     }
+
+    calculatedProps.components = {
+      ...(MaterialTable as any).defaultProps.components,
+      ...calculatedProps.components,
+    };
+    calculatedProps.icons = {
+      ...(MaterialTable as any).defaultProps.icons,
+      ...calculatedProps.icons,
+    };
+    calculatedProps.options = {
+      ...(MaterialTable as any).defaultProps.options,
+      ...calculatedProps.options,
+    };
 
     return calculatedProps;
   }
@@ -541,7 +542,19 @@ export class MaterialTable extends React.Component<any, any> {
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <props.components.Container style={{ position: 'relative', ...props.style }}>
+        <props.components.Container
+          style={
+            this.props.options.flexTable
+              ? {
+                  display: 'flex',
+                  flex: '1 1 auto',
+                  flexDirection: 'column',
+                  position: 'relative',
+                  ...props.style,
+                }
+              : { position: 'relative', ...props.style }
+          }
+        >
           {props.options.toolbar && (
             <props.components.Toolbar
               actions={props.actions}
@@ -596,12 +609,19 @@ export class MaterialTable extends React.Component<any, any> {
               onGroupRemoved={this.onGroupRemoved}
             />
           )}
-          <ScrollBar double={props.options.doubleHorizontalScroll}>
+          <ScrollBar
+            double={props.options.doubleHorizontalScroll}
+            flexTable={this.props.options.flexTable}
+          >
             <Droppable droppableId="headers" direction="horizontal">
               {(provided, snapshot) => (
                 <div ref={provided.innerRef}>
                   <div
-                    style={{ maxHeight: props.options.maxBodyHeight, overflowY: 'auto' }}
+                    style={
+                      this.props.options.flexTable
+                        ? {}
+                        : { maxHeight: props.options.maxBodyHeight, overflowY: 'auto' }
+                    }
                   >
                     <Table>
                       {props.options.header && (
@@ -696,6 +716,7 @@ export class MaterialTable extends React.Component<any, any> {
                 </div>
               </div>
             )}
+          {this.props.preFooterRow && this.props.preFooterRow}
           {this.renderFooter()}
 
           {(this.state.isLoading || props.isLoading) &&
@@ -719,10 +740,20 @@ export class MaterialTable extends React.Component<any, any> {
   }
 }
 
-const ScrollBar = ({ double, children }) => {
+const ScrollBar = ({ double, flexTable, children }) => {
   if (double) {
     return <DoubleScrollbar>{children}</DoubleScrollbar>;
   } else {
-    return <div style={{ overflowX: 'auto' }}>{children}</div>;
+    return (
+      <div
+        style={
+          flexTable
+            ? { height: 0, flex: '2 1 auto', overflow: 'auto' }
+            : { overflowX: 'auto' }
+        }
+      >
+        {children}
+      </div>
+    );
   }
 };
