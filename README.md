@@ -148,7 +148,7 @@ Here is a basic example of using material-ui-advanced-table within a react appli
 ```jsx
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import AdvancedMaterialTable from "material-ui-advanced-table";
+import { AdvancedMaterialTable } from "material-ui-advanced-table";
 
 class App extends Component {
   render() {
