@@ -294,6 +294,6 @@ export interface Localization {
   };
 }
 
-export default class AdvancedMaterialTable<
-  RowData extends object
-> extends React.Component<AdvancedMaterialTableProps<RowData>> {}
+export class AdvancedMaterialTable<RowData extends object> extends React.Component<
+  AdvancedMaterialTableProps<RowData>
+> {}
