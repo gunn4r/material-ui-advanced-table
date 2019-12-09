@@ -2,7 +2,7 @@ import React from 'react';
 import { IconProps } from '@material-ui/core/Icon';
 import { string } from 'prop-types';
 
-export interface AdvancedMaterialTableProps<RowData extends object> {
+export interface MaterialTableProps<RowData extends object> {
   actions?: (Action<RowData> | ((rowData: RowData) => Action<RowData>))[];
   columns: Column<RowData>[];
   components?: Components;
@@ -38,6 +38,7 @@ export interface AdvancedMaterialTableProps<RowData extends object> {
   onSearchChange?: (searchText: string) => void;
   onSelectionChange?: (data: RowData[], rowData?: RowData) => void;
   onTreeExpandChange?: (data: any, isExpanded: boolean) => void;
+  searchText?: string;
   style?: React.CSSProperties;
   tableRef?: any;
 }
@@ -295,5 +296,5 @@ export interface Localization {
 }
 
 export class AdvancedMaterialTable<RowData extends object> extends React.Component<
-  AdvancedMaterialTableProps<RowData>
+  MaterialTableProps<RowData>
 > {}
