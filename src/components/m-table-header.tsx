@@ -1,61 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  TableHead, TableRow, TableCell,
-  TableSortLabel, Checkbox, withStyles, createStyles
+  TableHead,
+  TableRow,
+  TableCell,
+  TableSortLabel,
+  Checkbox,
+  withStyles,
+  createStyles,
 } from '@material-ui/core';
-import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 
-export class MTableHeader extends React.Component<any, any> {
+export class MTableHeaderInner extends React.Component<any, any> {
   renderHeader() {
-    const mapArr = this.props.columns.filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
+    const mapArr = this.props.columns
+      .filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map((columnDef, index) => {
-        let content = (
-          <Draggable
-            key={columnDef.tableData.id}
-            draggableId={columnDef.tableData.id.toString()}
-            index={index}>
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-              // style={this.getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
-              >
-                {columnDef.title}
-              </div>
-            )}
-          </Draggable>
-        );
+        let content = columnDef.title;
 
-        // if (this.props.grouping && columnDef.grouping !== false && columnDef.field) {
-        //   content = (
-        //     <Draggable
-        //       key={columnDef.tableData.id}
-        //       draggableId={columnDef.tableData.id.toString()}
-        //       index={index}>
-        //       {(provided, snapshot) => (
-        //         <div
-        //           ref={provided.innerRef}
-        //           {...provided.draggableProps}
-        //           {...provided.dragHandleProps}
-        //         // style={this.getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
-        //         >
-        //           {columnDef.title}
-        //         </div>
-        //       )}
-        //     </Draggable>
-        //   );
-        // }
+        if (this.props.draggable) {
+          content = (
+            <Draggable
+              key={columnDef.tableData.id}
+              draggableId={columnDef.tableData.id.toString()}
+              index={index}
+            >
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  {columnDef.title}
+                </div>
+              )}
+            </Draggable>
+          );
+        }
 
         if (columnDef.sorting !== false && this.props.sorting) {
           content = (
             <TableSortLabel
+              IconComponent={this.props.icons.SortArrow}
               active={this.props.orderBy === columnDef.tableData.id}
               direction={this.props.orderDirection || 'asc'}
               onClick={() => {
-                const orderDirection = columnDef.tableData.id !== this.props.orderBy ? 'asc' : this.props.orderDirection === 'asc' ? 'desc' : 'asc';
+                const orderDirection =
+                  columnDef.tableData.id !== this.props.orderBy
+                    ? 'asc'
+                    : this.props.orderDirection === 'asc'
+                    ? 'desc'
+                    : this.props.orderDirection === 'desc'
+                    ? ''
+                    : this.props.orderDirection === ''
+                    ? 'asc'
+                    : 'desc';
                 this.props.onOrderChange(columnDef.tableData.id, orderDirection);
               }}
             >
@@ -67,7 +67,7 @@ export class MTableHeader extends React.Component<any, any> {
         return (
           <TableCell
             key={columnDef.tableData.id}
-            align={['numeric'].indexOf(columnDef.type) !== -1 ? "right" : "left"}
+            align={['numeric'].indexOf(columnDef.type) !== -1 ? 'right' : 'left'}
             className={this.props.classes.header}
             style={{ ...this.props.headerStyle, ...columnDef.headerStyle }}
           >
@@ -79,7 +79,10 @@ export class MTableHeader extends React.Component<any, any> {
   }
 
   renderActionsHeader() {
-    const localization = { ...(MTableHeader as any).defaultProps.localization, ...this.props.localization };
+    const localization = {
+      ...(MTableHeader as any).defaultProps.localization,
+      ...this.props.localization,
+    };
     return (
       <TableCell
         key="key-actions-column"
@@ -99,24 +102,34 @@ export class MTableHeader extends React.Component<any, any> {
         className={this.props.classes.header}
         style={{ ...this.props.headerStyle }}
       >
-        {this.props.showSelectAllCheckbox &&
+        {this.props.showSelectAllCheckbox && (
           <Checkbox
-            indeterminate={this.props.selectedCount > 0 && this.props.selectedCount < this.props.dataCount}
-            checked={this.props.dataCount > 0 && this.props.selectedCount === this.props.dataCount}
-            onChange={(event, checked) => this.props.onAllSelected && this.props.onAllSelected(checked)}
+            indeterminate={
+              this.props.selectedCount > 0 &&
+              this.props.selectedCount < this.props.dataCount
+            }
+            checked={
+              this.props.dataCount > 0 &&
+              this.props.selectedCount === this.props.dataCount
+            }
+            onChange={(event, checked) =>
+              this.props.onAllSelected && this.props.onAllSelected(checked)
+            }
           />
-        }
+        )}
       </TableCell>
     );
   }
 
   renderDetailPanelColumnCell() {
-    return <TableCell
-            padding="none"
-            key="key-detail-panel-column"
-            className={this.props.classes.header}
-            style={{ ...this.props.headerStyle }}
-          />;
+    return (
+      <TableCell
+        padding="none"
+        key="key-detail-panel-column"
+        className={this.props.classes.header}
+        style={{ ...this.props.headerStyle }}
+      />
+    );
   }
 
   render() {
@@ -131,7 +144,11 @@ export class MTableHeader extends React.Component<any, any> {
         if (this.props.hasSelection) {
           endPos = 1;
         }
-        headers.splice(this.props.actionsHeaderIndex + endPos, 0, this.renderActionsHeader());
+        headers.splice(
+          this.props.actionsHeaderIndex + endPos,
+          0,
+          this.renderActionsHeader()
+        );
       } else if (this.props.actionsHeaderIndex === -1) {
         headers.push(this.renderActionsHeader());
       }
@@ -146,10 +163,12 @@ export class MTableHeader extends React.Component<any, any> {
     }
 
     if (this.props.isTreeData > 0) {
-      headers.splice(0, 0,
+      headers.splice(
+        0,
+        0,
         <TableCell
           padding="none"
-          key={"key-tree-data-header"}
+          key={'key-tree-data-header'}
           className={this.props.classes.header}
           style={{ ...this.props.headerStyle }}
         />
@@ -159,18 +178,36 @@ export class MTableHeader extends React.Component<any, any> {
     this.props.columns
       .filter(columnDef => columnDef.tableData.groupOrder > -1)
       .forEach(columnDef => {
-        headers.splice(0, 0, <TableCell padding="checkbox" key={"key-group-header" + columnDef.tableData.id} className={this.props.classes.header} />);
+        headers.splice(
+          0,
+          0,
+          <TableCell
+            padding="checkbox"
+            key={'key-group-header' + columnDef.tableData.id}
+            className={this.props.classes.header}
+          />
+        );
       });
 
     return (
       <TableHead>
-        <TableRow>
-          {headers}
-        </TableRow>
+        <TableRow>{headers}</TableRow>
       </TableHead>
     );
   }
 }
+
+export const styles = theme =>
+  createStyles({
+    header: {
+      position: 'sticky',
+      top: 0,
+      zIndex: 10,
+      backgroundColor: theme.palette.background.paper, // Change according to theme,
+    },
+  });
+
+export const MTableHeader = withStyles(styles)(MTableHeaderInner);
 
 (MTableHeader as any).defaultProps = {
   dataCount: 0,
@@ -179,12 +216,13 @@ export class MTableHeader extends React.Component<any, any> {
   selectedCount: 0,
   sorting: true,
   localization: {
-    actions: 'Actions'
+    actions: 'Actions',
   },
   orderBy: undefined,
   orderDirection: 'asc',
   actionsHeaderIndex: 0,
-  detailPanelColumnAlignment: "left"
+  detailPanelColumnAlignment: 'left',
+  draggable: true,
 };
 
 (MTableHeader as any).propTypes = {
@@ -204,16 +242,5 @@ export class MTableHeader extends React.Component<any, any> {
   actionsHeaderIndex: PropTypes.number,
   showActionsColumn: PropTypes.bool,
   showSelectAllCheckbox: PropTypes.bool,
+  draggable: PropTypes.bool,
 };
-
-
-export const styles = theme => createStyles({
-  header: {
-    position: 'sticky',
-    top: 0,
-    zIndex: 10,
-    backgroundColor: theme.palette.background.paper, // Change according to theme,
-  }
-});
-
-export default withStyles(styles)(MTableHeader);

@@ -6,7 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import DataManager from './utils/data-manager';
 import { debounce } from 'debounce';
 
-export default class MaterialTable extends React.Component<any, any> {
+export class MaterialTable extends React.Component<any, any> {
   dataManager = new DataManager();
 
   constructor(props) {
@@ -42,6 +42,9 @@ export default class MaterialTable extends React.Component<any, any> {
   }
 
   componentDidMount() {
+    if (this.props.searchText) {
+      this.dataManager.changeSearchText(this.props.searchText);
+    }
     this.setState(this.dataManager.getRenderState(), () => {
       if (this.isRemoteData()) {
         this.onQueryChange(this.state.query);
@@ -67,6 +70,7 @@ export default class MaterialTable extends React.Component<any, any> {
       this.dataManager.changeApplySearch(false);
       this.dataManager.changeApplyFilters(false);
     } else {
+      this.dataManager.changeSearchText(props.searchText);
       this.dataManager.changeApplySearch(true);
       this.dataManager.changeApplyFilters(true);
       this.dataManager.setData(props.data);
@@ -89,8 +93,36 @@ export default class MaterialTable extends React.Component<any, any> {
     this.setState(this.dataManager.getRenderState());
   }
 
+  componentDidUpdate() {
+    const count = this.isRemoteData()
+      ? this.state.query.totalCount
+      : this.state.data.length;
+    const currentPage = this.isRemoteData()
+      ? this.state.query.page
+      : this.state.currentPage;
+    const pageSize = this.isRemoteData()
+      ? this.state.query.pageSize
+      : this.state.pageSize;
+
+    if (count <= pageSize * currentPage && currentPage !== 0) {
+      this.onChangePage(null, Math.max(0, Math.ceil(count / pageSize) - 1));
+    }
+  }
+
   getProps(props?: any) {
     const calculatedProps = { ...(props || this.props) };
+    calculatedProps.components = {
+      ...(MaterialTable as any).defaultProps.components,
+      ...calculatedProps.components,
+    };
+    calculatedProps.icons = {
+      ...(MaterialTable as any).defaultProps.icons,
+      ...calculatedProps.icons,
+    };
+    calculatedProps.options = {
+      ...(MaterialTable as any).defaultProps.options,
+      ...calculatedProps.options,
+    };
 
     const localization = calculatedProps.localization.body;
 
@@ -144,19 +176,6 @@ export default class MaterialTable extends React.Component<any, any> {
       }
     }
 
-    calculatedProps.components = {
-      ...(MaterialTable as any).defaultProps.components,
-      ...calculatedProps.components,
-    };
-    calculatedProps.icons = {
-      ...(MaterialTable as any).defaultProps.icons,
-      ...calculatedProps.icons,
-    };
-    calculatedProps.options = {
-      ...(MaterialTable as any).defaultProps.options,
-      ...calculatedProps.options,
-    };
-
     return calculatedProps;
   }
 
@@ -169,7 +188,10 @@ export default class MaterialTable extends React.Component<any, any> {
 
   onChangeColumnHidden = (columnId, hidden) => {
     this.dataManager.changeColumnHidden(columnId, hidden);
-    this.setState(this.dataManager.getRenderState());
+    this.setState(this.dataManager.getRenderState(), () => {
+      this.props.onChangeColumnHidden &&
+        this.props.onChangeColumnHidden(columnId, hidden);
+    });
   };
 
   onChangeGroupOrder = groupedColumn => {
@@ -178,19 +200,20 @@ export default class MaterialTable extends React.Component<any, any> {
   };
 
   onChangeOrder = (orderBy, orderDirection) => {
-    this.dataManager.changeOrder(orderBy, orderDirection);
+    const newOrderBy = orderDirection === '' ? -1 : orderBy;
+    this.dataManager.changeOrder(newOrderBy, orderDirection);
 
     if (this.isRemoteData()) {
       const query = { ...this.state.query };
       query.page = 0;
-      query.orderBy = this.state.columns.find(a => a.tableData.id === orderBy);
+      query.orderBy = this.state.columns.find(a => a.tableData.id === newOrderBy);
       query.orderDirection = orderDirection;
       this.onQueryChange(query, () => {
-        this.props.onOrderChange && this.props.onOrderChange(orderBy, orderDirection);
+        this.props.onOrderChange && this.props.onOrderChange(newOrderBy, orderDirection);
       });
     } else {
       this.setState(this.dataManager.getRenderState(), () => {
-        this.props.onOrderChange && this.props.onOrderChange(orderBy, orderDirection);
+        this.props.onOrderChange && this.props.onOrderChange(newOrderBy, orderDirection);
       });
     }
   };
@@ -232,7 +255,15 @@ export default class MaterialTable extends React.Component<any, any> {
 
   onDragEnd = result => {
     this.dataManager.changeByDrag(result);
-    this.setState(this.dataManager.getRenderState());
+    this.setState(this.dataManager.getRenderState(), () => {
+      if (
+        this.props.onColumnDragged &&
+        result.destination.droppableId === 'headers' &&
+        result.source.droppableId === 'headers'
+      ) {
+        this.props.onColumnDragged(result.source.index, result.destination.index);
+      }
+    });
   };
 
   onGroupExpandChanged = path => {
@@ -251,7 +282,9 @@ export default class MaterialTable extends React.Component<any, any> {
       type: 'DEFAULT',
     };
     this.dataManager.changeByDrag(result);
-    this.setState(this.dataManager.getRenderState());
+    this.setState(this.dataManager.getRenderState(), () => {
+      this.props.onGroupRemoved && this.props.onGroupRemoved(groupedColumn, index);
+    });
   };
 
   onEditingApproved = (mode, newData, oldData) => {
@@ -387,7 +420,9 @@ export default class MaterialTable extends React.Component<any, any> {
 
       this.onQueryChange(query);
     } else {
-      this.setState(this.dataManager.getRenderState());
+      this.setState(this.dataManager.getRenderState(), () => {
+        this.props.onSearchChange && this.props.onSearchChange(this.state.searchText);
+      });
     }
   }, this.props.options.debounceInterval);
 
@@ -399,6 +434,7 @@ export default class MaterialTable extends React.Component<any, any> {
   onFilterChangeDebounce = debounce(() => {
     if (this.isRemoteData()) {
       const query = { ...this.state.query };
+      query.page = 0;
       query.filters = this.state.columns
         .filter(a => a.tableData.filterValue)
         .map(a => ({
@@ -505,19 +541,7 @@ export default class MaterialTable extends React.Component<any, any> {
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <props.components.Container
-          style={
-            this.props.options.flexTable
-              ? {
-                  display: 'flex',
-                  flex: '1 1 auto',
-                  flexDirection: 'column',
-                  position: 'relative',
-                  ...props.style,
-                }
-              : { position: 'relative', ...props.style }
-          }
-        >
+        <props.components.Container style={{ position: 'relative', ...props.style }}>
           {props.options.toolbar && (
             <props.components.Toolbar
               actions={props.actions}
@@ -572,19 +596,12 @@ export default class MaterialTable extends React.Component<any, any> {
               onGroupRemoved={this.onGroupRemoved}
             />
           )}
-          <ScrollBar
-            double={props.options.doubleHorizontalScroll}
-            flexTable={this.props.options.flexTable}
-          >
+          <ScrollBar double={props.options.doubleHorizontalScroll}>
             <Droppable droppableId="headers" direction="horizontal">
               {(provided, snapshot) => (
                 <div ref={provided.innerRef}>
                   <div
-                    style={
-                      this.props.options.flexTable
-                        ? {}
-                        : { maxHeight: props.options.maxBodyHeight, overflowY: 'auto' }
-                    }
+                    style={{ maxHeight: props.options.maxBodyHeight, overflowY: 'auto' }}
                   >
                     <Table>
                       {props.options.header && (
@@ -596,6 +613,7 @@ export default class MaterialTable extends React.Component<any, any> {
                           columns={this.state.columns}
                           hasSelection={props.options.selection}
                           headerStyle={props.options.headerStyle}
+                          icons={props.icons}
                           selectedCount={this.state.selectedCount}
                           dataCount={
                             props.parentChildData
@@ -678,7 +696,6 @@ export default class MaterialTable extends React.Component<any, any> {
                 </div>
               </div>
             )}
-          {this.props.preFooterRow && this.props.preFooterRow}
           {this.renderFooter()}
 
           {(this.state.isLoading || props.isLoading) &&
@@ -702,20 +719,10 @@ export default class MaterialTable extends React.Component<any, any> {
   }
 }
 
-const ScrollBar = ({ double, flexTable, children }) => {
+const ScrollBar = ({ double, children }) => {
   if (double) {
     return <DoubleScrollbar>{children}</DoubleScrollbar>;
   } else {
-    return (
-      <div
-        style={
-          flexTable
-            ? { height: '0px', flex: '2 1 auto', overflow: 'auto' }
-            : { overflowX: 'auto' }
-        }
-      >
-        {children}
-      </div>
-    );
+    return <div style={{ overflowX: 'auto' }}>{children}</div>;
   }
 };
