@@ -249,6 +249,7 @@ export interface Options {
   toolbar?: boolean;
   toolbarButtonAlignment?: 'left' | 'right';
   detailPanelColumnAlignment?: 'left' | 'right';
+  flexTable?: boolean;
 }
 
 export interface Localization {
