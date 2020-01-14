@@ -15,7 +15,7 @@ export class MTableBodyRow extends React.Component<any, any> {
     const mapArr = this.props.columns
       .filter(columnDef => !columnDef.hidden && !(columnDef.tableData.groupOrder > -1))
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
-      .map((columnDef, index) => {
+      .map((columnDef) => {
         const value = this.props.getFieldValue(this.props.data, columnDef);
         return (
           <this.props.components.Cell

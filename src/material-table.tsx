@@ -293,14 +293,14 @@ export class MaterialTable extends React.Component<any, any> {
       this.setState({ isLoading: true }, () => {
         this.props.editable
           .onRowAdd(newData)
-          .then(result => {
+          .then(_result => {
             this.setState({ isLoading: false, showAddRow: false }, () => {
               if (this.isRemoteData()) {
                 this.onQueryChange(this.state.query);
               }
             });
           })
-          .catch(reason => {
+          .catch(_reason => {
             this.setState({ isLoading: false });
           });
       });
@@ -308,7 +308,7 @@ export class MaterialTable extends React.Component<any, any> {
       this.setState({ isLoading: true }, () => {
         this.props.editable
           .onRowUpdate(newData, oldData)
-          .then(result => {
+          .then(_result => {
             this.dataManager.changeRowEditing(oldData);
             this.setState(
               {
@@ -322,7 +322,7 @@ export class MaterialTable extends React.Component<any, any> {
               }
             );
           })
-          .catch(reason => {
+          .catch(_reason => {
             this.setState({ isLoading: false });
           });
       });
@@ -330,7 +330,7 @@ export class MaterialTable extends React.Component<any, any> {
       this.setState({ isLoading: true }, () => {
         this.props.editable
           .onRowDelete(oldData)
-          .then(result => {
+          .then(_result => {
             this.dataManager.changeRowEditing(oldData);
             this.setState(
               {
@@ -344,7 +344,7 @@ export class MaterialTable extends React.Component<any, any> {
               }
             );
           })
-          .catch(reason => {
+          .catch(_reason => {
             this.setState({ isLoading: false });
           });
       });
@@ -614,7 +614,7 @@ export class MaterialTable extends React.Component<any, any> {
             flexTable={this.props.options.flexTable}
           >
             <Droppable droppableId="headers" direction="horizontal">
-              {(provided, snapshot) => (
+              {(provided, _snapshot) => (
                 <div ref={provided.innerRef}>
                   <div
                     style={

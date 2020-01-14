@@ -12,7 +12,6 @@ import {
   Checkbox,
   ListItemText,
   InputAdornment,
-  Icon,
   Tooltip,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';

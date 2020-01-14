@@ -123,7 +123,7 @@ export class MTableGroupRow extends React.Component<any, any> {
                 transition: 'all ease 200ms',
                 ...this.rotateIconStyle(this.props.groupData.isExpanded),
               }}
-              onClick={event => {
+              onClick={() => {
                 this.props.onGroupExpandChanged(this.props.path);
               }}
             >

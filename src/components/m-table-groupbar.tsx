@@ -22,7 +22,7 @@ export class MTableGroupbar extends React.Component<any, any> {
     ...draggableStyle,
   });
 
-  getListStyle = isDraggingOver => ({
+  getListStyle = (/*isDraggingOver*/) => ({
     // background: isDraggingOver ? 'lightblue' : '#0000000a',
     background: '#0000000a',
     display: 'flex',
@@ -37,10 +37,10 @@ export class MTableGroupbar extends React.Component<any, any> {
     return (
       <Toolbar style={{ padding: 0, minHeight: 'unset' }}>
         <Droppable droppableId="groups" direction="horizontal" placeholder="Deneme">
-          {(provided, snapshot) => (
+          {(provided, /*snapshot*/) => (
             <div
               ref={provided.innerRef}
-              style={this.getListStyle(snapshot.isDraggingOver)}
+              style={this.getListStyle(/*snapshot.isDraggingOver*/)}
             >
               {this.props.groupColumns.length > 0 && (
                 <Typography variant="caption" style={{ padding: 8 }}>

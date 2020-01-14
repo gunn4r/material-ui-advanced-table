@@ -26,7 +26,7 @@ export class MTableHeaderInner extends React.Component<any, any> {
               draggableId={columnDef.tableData.id.toString()}
               index={index}
             >
-              {(provided, snapshot) => (
+              {(provided) => (
                 <div
                   ref={provided.innerRef}
                   {...provided.draggableProps}

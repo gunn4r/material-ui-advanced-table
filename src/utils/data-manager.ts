@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import formatDate from 'date-fns/format';
 import { byString } from './';
 
@@ -608,6 +609,7 @@ export default class DataManager {
               ? !columnDef.hidden
               : columnDef.searchable;
           })
+          // eslint-disable-next-line array-callback-return
           .some(columnDef => {
             if (columnDef.customFilterAndSearch) {
               return Boolean(
