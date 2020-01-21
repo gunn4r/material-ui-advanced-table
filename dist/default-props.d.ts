@@ -110,6 +110,5 @@ export declare const defaultProps: {
         };
     };
     style: {};
-    preFooterRow: null;
     searchText: string;
 };

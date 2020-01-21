@@ -2937,7 +2937,6 @@ var defaultProps = {
     }
   },
   style: {},
-  preFooterRow: null,
   searchText: ''
 };
 
@@ -4793,7 +4792,7 @@ function (_React$Component) {
         height: '100%',
         width: '100%'
       }
-    }, React.createElement(core.LinearProgress, null))), this.props.preFooterRow && this.props.preFooterRow, this.renderFooter(), (this.state.isLoading || props.isLoading) && props.options.loadingType === 'overlay' && React.createElement("div", {
+    }, React.createElement(core.LinearProgress, null))), this.props.preFooterRow, this.renderFooter(), (this.state.isLoading || props.isLoading) && props.options.loadingType === 'overlay' && React.createElement("div", {
       style: {
         position: 'absolute',
         top: 0,

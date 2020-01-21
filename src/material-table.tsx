@@ -716,7 +716,9 @@ export class MaterialTable extends React.Component<any, any> {
                 </div>
               </div>
             )}
-          {this.props.preFooterRow && this.props.preFooterRow}
+
+          {this.props.preFooterRow}
+
           {this.renderFooter()}
 
           {(this.state.isLoading || props.isLoading) &&
