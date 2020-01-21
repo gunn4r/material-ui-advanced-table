@@ -41,6 +41,7 @@ export interface AdvancedMaterialTableProps<RowData extends object> {
   searchText?: string;
   style?: React.CSSProperties;
   tableRef?: any;
+  preFooterRow?: React.ElementType;
 }
 
 export interface Filter<RowData extends object> {
